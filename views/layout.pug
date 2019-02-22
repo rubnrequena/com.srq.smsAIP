@@ -1,0 +1,49 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport',content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible',content='IE=edge')
+    title= title
+    // Vendor styles
+    link(rel='stylesheet' href='vendor/fontawesome/css/font-awesome.css')
+    link(rel='stylesheet' href='vendor/metisMenu/dist/metisMenu.css')
+    link(rel='stylesheet' href='vendor/animate.css/animate.css')
+    link(rel='stylesheet' href='vendor/bootstrap/dist/css/bootstrap.css')
+    // App styles
+    link(rel='stylesheet' href='fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css')
+    link(rel='stylesheet' href='fonts/pe-icon-7-stroke/css/helper.css')
+    link(rel='stylesheet' href='styles/style.css')
+  body
+    // Simple splash screen
+  .splash
+    .color-line
+    .splash-title
+      h1 SMS Man
+      p
+        | Administrador de Mensajeria Distribuida
+      .spinner
+        .rect1
+        .rect2
+        .rect3
+        .rect4
+        .rect5
+  //if lt IE 7
+    p.alert.alert-danger
+      | You are using an 
+      strong outdated
+      |  browser. Please 
+      a(href='http://browsehappy.com/') upgrade your browser
+      |  to improve your experience.
+  block content
+  // Vendor scripts
+  script(src='vendor/jquery/dist/jquery.min.js')
+  script(src='vendor/jquery-ui/jquery-ui.min.js')
+  script(src='vendor/slimScroll/jquery.slimscroll.min.js')
+  script(src='vendor/bootstrap/dist/js/bootstrap.min.js')
+  script(src='vendor/metisMenu/dist/metisMenu.min.js')
+  script(src='vendor/iCheck/icheck.min.js')
+  script(src='vendor/peity/jquery.peity.min.js')
+  script(src='vendor/sparkline/index.js')
+  // App scripts
+  script(src='scripts/homer.js')
