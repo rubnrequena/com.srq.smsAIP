@@ -2,6 +2,7 @@ let mongo = require('mongoose');
 let obID = mongo.SchemaTypes.ObjectId;
 
 let smsSchema = new mongo.Schema({
+    hash: String,
     numero:{
         type:String,
         required:true
@@ -13,7 +14,7 @@ let smsSchema = new mongo.Schema({
     },
     enviado:{
      type:Number,
-     default:0,     
+     default:0,
     },
     recibido:{
         type:Number,
@@ -21,7 +22,10 @@ let smsSchema = new mongo.Schema({
     },
     capturado:{
         type:Number,
-        default:0,     
+        default:0,    
+    },
+    expira:{
+        type:Number
     },
     minero: obID
 });
