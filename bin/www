@@ -28,7 +28,7 @@ server.on('listening', onListening);
 /**
  * Connect DBs
  */
-mongoose.connect("mongodb://localhost:27017/smsman",{useNewUrlParser: true},(err)=> {
+mongoose.connect("mongodb://dario:dario123@ds139985.mlab.com:39985/srqhermes",{useNewUrlParser: true},(err)=> {
   if (err) console.log("Error al conectar con Mongo");
   console.log('conectado a mongoDB');
   server.listen(port);
