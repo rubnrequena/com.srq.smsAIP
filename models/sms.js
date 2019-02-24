@@ -27,7 +27,7 @@ let smsSchema = new mongo.Schema({
     expira:{
         type:Number
     },
-    minero: obID
+    minero: String
 });
 
 module.exports = mongo.model('sms',smsSchema);

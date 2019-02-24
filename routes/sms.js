@@ -72,7 +72,7 @@ router.get('/minado/:hash',(req,res,next)=>{
         }
     })
 })
-router.get('/minero/:id',(req,res,next)=>{
+router.get('/minero/',(req,res,next)=>{
     Sms.findOne({enviado:0},(err,sms)=>{
         var rs = {};
         if (sms) {
@@ -81,7 +81,7 @@ router.get('/minero/:id',(req,res,next)=>{
             res.json(rs);
             //marcar como pendiente
             sms.enviado = -1;
-            sms.minero = req.params.id;
+            sms.minero = "dev";
             sms.capturado = Date.now();
             sms.save();
         } else {
