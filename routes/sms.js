@@ -31,7 +31,19 @@ router.get('/restore',(req,res,next)=>{
         res.json(raw);
     });
 })
-
+router.post('/add',(req,res,next)=>{
+    var now = new Date();
+    let s = new Sms({
+        numero:req.body.num,
+        texto:req.body.txt,
+        recibido:now.getTime()
+    });
+    s.hash = md5(s.numero+s.texto+s.recibido);
+    s.save((err)=>{
+        if (err) console.log(err);    
+        else res.json(s);
+    });
+})
 router.get('/add/:num/:txt',(req,res,next)=>{
     var now = new Date();
     let s = new Sms({
