@@ -69,7 +69,7 @@ router.get('/minero/',(req,res,next)=>{
             rs.code="none";
             res.json(rs);
         }
-    }).sort({enviado:-1});
+    }).sort({recibido:-1});
 })
 
 router.get("/:id",(req,res,next)=>{
