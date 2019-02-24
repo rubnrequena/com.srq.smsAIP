@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  .login-container
+    .row
+      .col-md-12
+        .text-center.m-b-md
+          h3 Enviar un Mensaje
+          if message
+            small#msg.text-success=message
+        .hpanel
+          .panel-body
+            form#loginForm(action='/sms',method='post')
+              .form-group
+                label.control-label(for='telefono') Numero
+                input#telefono.form-control(type='tel' title='Por favor ingrese el destino' required='' value='' name='num')
+              .form-group
+                label.control-label(for='cuerpo') Cuerpo del Mensaje
+                textarea#cuerpo.form-control(name="txt", cols="30", rows="10")
+              .checkbox
+                input#remember.i-checks(type='checkbox' checked='true')
+                |                                      Recordar Numero
+              button.btn.btn-success.btn-block Enviar
+    .row
+      .col-md-12.text-center
+        strong SRQ WebApp
+        br
+        |  2019 Copyright
+block footer
+  script(src='/vendor/jquery/dist/jquery.min.js')
+  script(src='/vendor/jquery-ui/jquery-ui.min.js')
+  script(src='/vendor/metisMenu/dist/metisMenu.min.js')
+  script(src='/vendor/iCheck/icheck.min.js')
+  script(src='/scripts/homer.js')
+  script.
+    $('#loginForm').submit(function () {
+      var r = $('#remember').prop("checked");
+        if (r) {
+          var tel = $('#telefono').val();
+          localStorage.setItem("srq.sms.remember",tel);
+        } else localStorage.removeItem('srq.sms.remember');
+    });
+    var n = localStorage.getItem("srq.sms.remember");
+    if (n) $('#telefono').val(n);
+    setTimeout(()=>{ $('#msg').remove()},2000);

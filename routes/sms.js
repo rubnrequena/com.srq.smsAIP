@@ -2,26 +2,22 @@ var express = require('express');
 var router = express.Router();
 var md5 = require("md5");
 
+var smsControl = require('../controllers/SmsControl');
 let Sms = require('../models/sms');
-var numQ = 1;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    
-});
-
+    res.render("sendSMS");
+})
+router.post('/', async (req, res, next) => {
+    let sms = await smsControl.enviar(req.body);
+    if (sms) res.render("sendSMS",{message:"Mensaje enviado"});
+    else console.log(err);
+})
 router.get('/all',(req,res,next)=>{
     let lm = parseInt(req.query.limit) || 20;
     Sms.find({},(err,mensajes)=>{
         if (err) console.log(err);
-        res.json(mensajes);
-    }).sort({recibido:-1}).limit(lm);
-})
-router.get('/queue',(req,res,next)=>{
-    let lm = parseInt(req.query.limit) || 10;
-    Sms.find({enviado:0},(err,mensajes)=>{
-        if (err) console.log(err);
-        console.log(mensajes.length);
         res.json(mensajes);
     }).sort({recibido:-1}).limit(lm);
 })
@@ -31,33 +27,6 @@ router.get('/restore',(req,res,next)=>{
         res.json(raw);
     });
 })
-router.post('/add',(req,res,next)=>{
-    var now = new Date();
-    let s = new Sms({
-        numero:req.body.num,
-        texto:req.body.txt,
-        recibido:now.getTime()
-    });
-    s.hash = md5(s.numero+s.texto+s.recibido);
-    s.save((err)=>{
-        if (err) console.log(err);    
-        else res.json(s);
-    });
-})
-router.get('/add/:num/:txt',(req,res,next)=>{
-    var now = new Date();
-    let s = new Sms({
-        numero:req.params.num,
-        texto:req.params.txt+" "+numQ++,
-        recibido:now.getTime()
-    });
-    s.hash = md5(s.numero+s.texto+s.recibido);
-    s.save((err)=>{
-        if (err) console.log(err);    
-        else res.json(s);
-    });
-})
-
 router.get('/minado/:hash',(req,res,next)=>{
     Sms.findById(req.params.hash,(err,sms)=>{
         if (err) console.log(err)
@@ -100,7 +69,7 @@ router.get('/minero/',(req,res,next)=>{
             rs.code="none";
             res.json(rs);
         }
-    }).sort({enviadoHora:-1});
+    }).sort({enviado:-1});
 })
 
 router.get("/:id",(req,res,next)=>{
