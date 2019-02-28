@@ -1,8 +1,8 @@
 let mongo = require('mongoose');
-let obID = mongo.SchemaTypes.ObjectId;
-
+    
 let smsSchema = new mongo.Schema({
     hash: String,
+    usuario:mongo.SchemaTypes.ObjectId,
     numero:{
         type:String,
         required:true
@@ -11,6 +11,10 @@ let smsSchema = new mongo.Schema({
         type:String,
         required:true,
         maxlength:160
+    },
+    prioridad: {
+        type:Number,
+        default:0
     },
     enviado:{
      type:Number,

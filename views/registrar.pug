@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  .color-line
+      .back-link
+        a.btn.btn-primary(href="/") Volver al inicio
+      .register-container
+        .row
+          .col-md-12
+            .text-center.m-b-md
+              h3 Registro
+            .hpanel
+              .panel-body
+                form#loginForm(action="/registrar" method="post")
+                  .row
+                    .form-group.col-lg-6
+                      label Usuario
+                      input.form-control(type="text" value="" id="" name="usuario")
+                    .form-group.col-lg-6
+                      label Nombre
+                      input.form-control(type="text" value="" id="" name="nombre")
+                    .form-group.col-lg-6
+                      label Contraseña
+                      input.form-control(type="password" value="" id="" name="clave")
+                    .form-group.col-lg-6
+                      label Repetir Contraseña
+                      input.form-control(type="password" value="" id="" name="clave2")
+                    .form-group.col-lg-6
+                      label Correo
+                      input.form-control(type="mail" value="" id="" name="correo")
+                    .form-group.col-lg-6
+                      label Telefono
+                      input.form-control(type="tel" value="" id="" name="telefono")                  
+                  .text-center
+                    button.btn.btn-success(type="submit") Registrar
+                    button.btn.btn-default(type="reset") Cancelar
+        .row
+          .col-md-12.text-center
+            strong SRQ
+            |  - Responsive WebApp 
+            br
+            |  2019 Copyright
+block append footer
+        if ok
+          script.
+            alert('Usuario registrado')

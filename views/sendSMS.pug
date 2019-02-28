@@ -26,12 +26,7 @@ block content
         strong SRQ WebApp
         br
         |  2019 Copyright
-block footer
-  script(src='/vendor/jquery/dist/jquery.min.js')
-  script(src='/vendor/jquery-ui/jquery-ui.min.js')
-  script(src='/vendor/metisMenu/dist/metisMenu.min.js')
-  script(src='/vendor/iCheck/icheck.min.js')
-  script(src='/scripts/homer.js')
+block append footer
   script.
     $('#loginForm').submit(function () {
       var r = $('#remember').prop("checked");

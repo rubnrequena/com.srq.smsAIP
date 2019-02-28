@@ -1,6 +1,18 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  .color-line
+  .back-link
+    a.btn.btn-primary(href="index.html") Back to Dashboard
+  .error-container
+    i.pe-7s-way.text-success.big-icon
+    h1= error.status
+    strong= message
+    br
+    if error.status="401"
+      a.btn.btn-xs.btn-success(href="/login")
+        | Iniciar Sesión
+    else    
+      a.btn.btn-xs.btn-success(href="/") Regresar al inicio
+    if (error.stack)  
+      pre #{error.stack}

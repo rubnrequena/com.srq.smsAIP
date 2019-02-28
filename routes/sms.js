@@ -1,16 +1,17 @@
 var express = require('express');
 var router = express.Router();
 var md5 = require("md5");
+const auth = require('../config/passport');
 
 var smsControl = require('../controllers/SmsControl');
 let Sms = require('../models/sms');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', auth.estaAutenticado, function(req, res, next) {
     res.render("sendSMS");
 })
-router.post('/', async (req, res, next) => {
-    let sms = await smsControl.enviar(req.body);
+router.post('/',auth.estaAutenticado, async (req, res, next) => {
+    let sms = await smsControl.enviar(req.user,req.body);
     if (sms) res.render("sendSMS",{message:"Mensaje enviado"});
     else console.log(err);
 })

@@ -18,6 +18,11 @@ router.get('/enviar/:num/:txt/:repetir',async (req,res,next)=>{
     res.json(lote);
 })
 
+router.get('/reward/:id',async (req,res,next)=>{
+    let sms = await smsControl.claimReward(req.params.id);
+    res.json(sms);
+})
+
 router.get('/queue', async (req,res,next)=>{
     let r = await smsControl.queue(req.query);
     res.json(r);
