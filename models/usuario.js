@@ -28,6 +28,8 @@ var usuarioSq = new mongo.Schema({
     correo:String
   }
 })
+
+
 usuarioSq.pre('save',function (next) {
   var usuario = this;
   if (!usuario.isModified("clave")) return next();

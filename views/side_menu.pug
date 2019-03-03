@@ -4,206 +4,35 @@ aside#menu
       a(href='index.html')
         img.img-circle.m-b(src='images/profile.jpg' alt='logo')
       .stats-label.text-color
-        span.font-extra-bold.font-uppercase Robert Razer
+        span.font-extra-bold.font-uppercase= usuario.nombre
         .dropdown
           a.dropdown-toggle(href='#' data-toggle='dropdown')
             small.text-muted
-              | Founder of App 
+              | NickName
               b.caret
           ul.dropdown-menu.animated.flipInX.m-t-xs
             li
-              a(href='contacts.html') Contacts
+              a(href='/contactos') Contactos
             li
-              a(href='profile.html') Profile
-            li
-              a(href='analytics.html') Analytics
+              a(href='/perfil') Perfil
             li.divider
             li
-              a(href='login.html') Logout
-        #sparkline1.small-chart.m-t-sm
-        div
-          h4.font-extra-bold.m-b-xs
-            | $260 104,200
-          small.text-muted Your income from the last year in sales product X.
+              a(href='/logout') Cerrar Sesion
     ul#side-menu.nav
       li.active
-        a(href='index.html')
-          span.nav-label Dashboard
-          span.label.label-success.pull-right v.1
+        a(href='/')
+          span.nav-label Panel de Control
+          //span.label.label-success.pull-right v.1
       li
-        a(href='analytics.html')
-          span.nav-label Analytics
+        a(href='/sms')
+          span.nav-label Enviar SMS
           span.label.label-warning.pull-right NEW
       li
         a(href='#')
-          span.nav-label Interface
+          span.nav-label Usuarios
           span.fa.arrow
         ul.nav.nav-second-level
           li
-            a(href='panels.html') Panels design
+            a(href='/registrar') Registrar
           li
-            a(href='typography.html') Typography
-          li
-            a(href='buttons.html') Colors &amp; Buttons
-          li
-            a(href='components.html') Components
-          li
-            a(href='alerts.html') Alerts
-          li
-            a(href='modals.html') Modals
-          li
-            a(href='loading_buttons.html') Loading buttons
-          li
-            a(href='draggable.html') Draggable panels
-          li
-            a(href='code_editor.html') Code editor
-          li
-            a(href='email_template.html') Email template
-          li
-            a(href='nestable_list.html') List
-          li
-            a(href='tour.html') Tour
-          li
-            a(href='icons.html') Icons library
-      li
-        a(href='#')
-          span.nav-label App views
-          span.fa.arrow
-        ul.nav.nav-second-level
-          li
-            a(href='contacts.html') Contacts
-          li
-            a(href='projects.html') Projects
-          li
-            a(href='project.html') Project detail
-          li
-            a(href='app_plans.html') App plans
-          li
-            a(href='social_board.html') Social board
-          li
-            a(href='faq.html') FAQ
-          li
-            a(href='timeline.html') Timeline
-          li
-            a(href='notes.html') Notes
-          li
-            a(href='profile.html') Profile
-          li
-            a(href='mailbox.html') Mailbox
-          li
-            a(href='mailbox_compose.html') Email compose
-          li
-            a(href='mailbox_view.html') Email view
-          li
-            a(href='blog.html') Blog
-          li
-            a(href='blog_details.html') Blog article
-          li
-            a(href='forum.html') Forum
-          li
-            a(href='forum_details.html') Forum details
-          li
-            a(href='gallery.html') Gallery
-          li
-            a(href='calendar.html') Calendar
-          li
-            a(href='invoice.html') Invoice
-          li
-            a(href='file_manager.html') File manager
-          li
-            a(href='chat_view.html') Chat view
-          li
-            a(href='search.html') Search view
-      li
-        a(href='#')
-          span.nav-label Charts
-          span.fa.arrow
-        ul.nav.nav-second-level
-          li
-            a(href='chartjs.html') ChartJs
-          li
-            a(href='flot.html') Flot charts
-          li
-            a(href='inline.html') Inline graphs
-          li
-            a(href='chartist.html') Chartist
-          li
-            a(href='c3.html') C3 Charts
-      li
-        a(href='#')
-          span.nav-label Box transitions
-          span.fa.arrow
-        ul.nav.nav-second-level
-          li
-            a(href='overview.html')
-              span.label.label-success.pull-right Start
-              |  Overview
-          li
-            a(href='transition_two.html') Columns from up
-          li
-            a(href='transition_one.html') Columns custom
-          li
-            a(href='transition_three.html') Panels zoom
-          li
-            a(href='transition_four.html') Rows from down
-          li
-            a(href='transition_five.html') Rows from right
-      li
-        a(href='#')
-          span.nav-label Common views
-          span.fa.arrow
-        ul.nav.nav-second-level
-          li
-            a(href='login.html') Login
-          li
-            a(href='register.html') Register
-          li
-            a(href='error_one.html') Error 404
-          li
-            a(href='error_two.html') Error 505
-          li
-            a(href='lock.html') Lock screen
-          li
-            a(href='password_recovery.html') Passwor recovery
-      li
-        a(href='#')
-          span.nav-label Tables
-          span.fa.arrow
-        ul.nav.nav-second-level
-          li
-            a(href='tables_design.html') Tables design
-          li
-            a(href='datatables.html') Data tables
-          li
-            a(href='footable.html') Foo Table
-      li
-        a(href='widgets.html')
-          span.nav-label Widgets
-          span.label.label-success.pull-right Special
-      li
-        a(href='#')
-          span.nav-label Forms
-          span.fa.arrow
-        ul.nav.nav-second-level
-          li
-            a(href='forms_elements.html') Forms elements
-          li
-            a(href='forms_extended.html') Forms extended
-          li
-            a(href='text_editor.html') Text editor
-          li
-            a(href='wizard.html') Wizard
-          li
-            a(href='validation.html') Validation
-      li
-        a(href='options.html')
-          span.nav-label Layout options
-      li
-        a(href='grid_system.html')
-          span.nav-label Grid system
-      li
-        a(href='landing_page.html')
-          span.nav-label Landing page
-      li
-        a(href='package.html')
-          span.nav-label Package
+            a(href='/recargar') Recargar 

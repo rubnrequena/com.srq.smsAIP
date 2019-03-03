@@ -1,0 +1,11 @@
+each sms in mensajes
+  .chat-message
+    img.message-avatar(src='images/a1.jpg' alt='')
+    .message
+      a.message-author(href='#')=  sms.numero
+      span.message-date= sms.recibidoStamp()
+      span.message-content= sms.texto
+      .m-t-md
+        a.btn.btn-xs.btn-default
+          i.fa.fa-send
+          |  Reenviar

@@ -1,0 +1,410 @@
+extends layout
+
+block content
+  include header_menu
+  include side_menu
+  #wrapper(style='min-height: 1811px;')
+    .normalheader.transition.animated.fadeIn
+      .hpanel
+        .panel-body
+          a.small-header-action(href='')
+            .clip-header
+              i.fa.fa-arrow-up
+          #hbreadcrumb.pull-right.m-t-lg
+            ol.hbreadcrumb.breadcrumb
+              li
+                a(href='index.html') Dashboard
+              li
+                span App views
+              li.active
+                span Perfil 
+          h2.font-light.m-b-xs
+            | Perfil
+          small Show user data in clear profile design
+    .content.animate-panel
+      .row
+        .col-lg-4(style='')
+          .hpanel.hgreen
+            .panel-body
+              .pull-right.text-right
+                .btn-group
+                  i.fa.fa-facebook.btn.btn-default.btn-xs
+                  i.fa.fa-twitter.btn.btn-default.btn-xs
+                  i.fa.fa-linkedin.btn.btn-default.btn-xs
+              img.img-circle.m-b.m-t-md(alt='logo' src='images/profile.jpg')
+              h3
+                a(href='')= usuario.nombre              
+            .panel-body
+              dl
+                dt Description lists
+                dd A description list is perfect for defining terms.
+                dt Euismod
+                dd Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
+                dd Donec id elit non mi porta gravida at eget metus.
+                dt Malesuada porta
+                dd Etiam porta sem malesuada magna mollis euismod.
+            .panel-footer.contact-footer
+              .row
+                .col-md-4.border-right(style='')
+                  .contact-stat
+                    span Projects: 
+                    strong 200
+                .col-md-4.border-right(style='')
+                  .contact-stat
+                    span Messages: 
+                    strong 300
+                .col-md-4(style='')
+                  .contact-stat
+                    span Views: 
+                    strong 400
+        .col-lg-8(style='')
+          .hpanel
+            .hpanel
+              ul.nav.nav-tabs
+                li.active
+                  a(data-toggle='tab' href='#tab-1') Project
+                li
+                  a(data-toggle='tab' href='#tab-2') Mensajes
+              .tab-content
+                #tab-1.tab-pane.active
+                  .panel-body
+                    strong Lorem ipsum dolor sit amet, consectetuer adipiscing
+                    p
+                      | A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of
+                      | existence in this spot, which was created for the bliss of souls like mine.
+                    .table-responsive
+                      table.table.table-striped
+                        thead
+                          tr
+                            th #
+                            th Project 
+                            th Name 
+                            th Phone 
+                            th Company 
+                            th Completed 
+                            th Task
+                            th Date
+                            th Action
+                        tbody
+                          tr
+                            td 1
+                            td
+                              | Project 
+                              small This is example of project
+                            td Patrick Smith
+                            td 0800 051213
+                            td Inceptos Hymenaeos Ltd
+                            td
+                              span.pie(style='display: none;') 2/45
+                              svg.peity(height='16' width='16')
+                                path(d='M 8 0 A 8 8 0 0 1 10.205098846535993 0.30990643249344885 L 8 8' fill='#62cb31')
+                                path(d='M 10.205098846535993 0.30990643249344885 A 8 8 0 1 1 7.999999999999998 0 L 8 8' fill='#edf0f5')
+                            td 20%
+                            td Jul 14, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                          tr
+                            td 2
+                            td Alpha project
+                            td Alice Jackson
+                            td 0500 780909
+                            td Nec Euismod In Company
+                            td
+                              span.pie(style='display: none;') 1/5
+                              svg.peity(height='16' width='16')
+                                path(d='M 8 0 A 8 8 0 0 1 15.60845213036123 5.52786404500042 L 8 8' fill='#62cb31')
+                                path(d='M 15.60845213036123 5.52786404500042 A 8 8 0 1 1 7.999999999999998 0 L 8 8' fill='#edf0f5')
+                            td 40%
+                            td Jul 16, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                          tr
+                            td 3
+                            td Betha project
+                            td John Smith
+                            td 0800 1111
+                            td Erat Volutpat
+                            td
+                              span.pie(style='display: none;') 4/7
+                              svg.peity(height='16' width='16')
+                                path(d='M 8 0 A 8 8 0 1 1 4.5289300870595355 15.207750943219352 L 8 8' fill='#62cb31')
+                                path(d='M 4.5289300870595355 15.207750943219352 A 8 8 0 0 1 7.999999999999998 0 L 8 8' fill='#edf0f5')
+                            td 75%
+                            td Jul 18, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                          tr
+                            td 4
+                            td Gamma project
+                            td Anna Jordan
+                            td (016977) 0648
+                            td Tellus Ltd
+                            td
+                              span.pie(style='display: none;') 12/3
+                              svg.peity(height='16' width='16')
+                                circle(cx='8' cy='8' r='8' fill='#62cb31')
+                            td 18%
+                            td Jul 22, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                          tr
+                            td 2
+                            td Alpha project
+                            td Alice Jackson
+                            td 0500 780909
+                            td Nec Euismod In Company
+                            td
+                              span.pie(style='display: none;') 2/5
+                              svg.peity(height='16' width='16')
+                                path(d='M 8 0 A 8 8 0 0 1 12.702282018339785 14.47213595499958 L 8 8' fill='#62cb31')
+                                path(d='M 12.702282018339785 14.47213595499958 A 8 8 0 1 1 7.999999999999998 0 L 8 8' fill='#edf0f5')
+                            td 40%
+                            td Jul 16, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                          tr
+                            td 1
+                            td
+                              | Project 
+                              small This is example of project
+                            td Patrick Smith
+                            td 0800 051213
+                            td Inceptos Hymenaeos Ltd
+                            td
+                              span.pie(style='display: none;') 1/5
+                              svg.peity(height='16' width='16')
+                                path(d='M 8 0 A 8 8 0 0 1 15.60845213036123 5.52786404500042 L 8 8' fill='#62cb31')
+                                path(d='M 15.60845213036123 5.52786404500042 A 8 8 0 1 1 7.999999999999998 0 L 8 8' fill='#edf0f5')
+                            td 20%
+                            td Jul 14, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                          tr
+                            td 4
+                            td Gamma project
+                            td Anna Jordan
+                            td (016977) 0648
+                            td Tellus Ltd
+                            td
+                              span.pie(style='display: none;') 2/8
+                              svg.peity(height='16' width='16')
+                                path(d='M 8 0 A 8 8 0 0 1 16 8 L 8 8' fill='#62cb31')
+                                path(d='M 16 8 A 8 8 0 1 1 7.999999999999998 0 L 8 8' fill='#edf0f5')
+                            td 18%
+                            td Jul 22, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                          tr
+                            td 1
+                            td
+                              | Project 
+                              small This is example of project
+                            td Patrick Smith
+                            td 0800 051213
+                            td Inceptos Hymenaeos Ltd
+                            td
+                              span.pie(style='display: none;') 15/5
+                              svg.peity(height='16' width='16')
+                                circle(cx='8' cy='8' r='8' fill='#62cb31')
+                            td 20%
+                            td Jul 14, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                          tr
+                            td 2
+                            td Alpha project
+                            td Alice Jackson
+                            td 0500 780909
+                            td Nec Euismod In Company
+                            td
+                              span.pie(style='display: none;') 2/3
+                              svg.peity(height='16' width='16')
+                                path(d='M 8 0 A 8 8 0 1 1 1.0717967697244921 12.000000000000004 L 8 8' fill='#62cb31')
+                                path(d='M 1.0717967697244921 12.000000000000004 A 8 8 0 0 1 7.999999999999998 0 L 8 8' fill='#edf0f5')
+                            td 40%
+                            td Jul 16, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                          tr
+                            td 3
+                            td Betha project
+                            td John Smith
+                            td 0800 1111
+                            td Erat Volutpat
+                            td
+                              span.pie(style='display: none;') 4/5
+                              svg.peity(height='16' width='16')
+                                path(d='M 8 0 A 8 8 0 1 1 0.39154786963877086 5.527864045000422 L 8 8' fill='#62cb31')
+                                path(d='M 0.39154786963877086 5.527864045000422 A 8 8 0 0 1 7.999999999999998 0 L 8 8' fill='#edf0f5')
+                            td 75%
+                            td Jul 18, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                          tr
+                            td 4
+                            td Gamma project
+                            td Anna Jordan
+                            td (016977) 0648
+                            td Tellus Ltd
+                            td
+                              span.pie(style='display: none;') 2/12
+                              svg.peity(height='16' width='16')
+                                path(d='M 8 0 A 8 8 0 0 1 14.928203230275509 4 L 8 8' fill='#62cb31')
+                                path(d='M 14.928203230275509 4 A 8 8 0 1 1 7.999999999999998 0 L 8 8' fill='#edf0f5')
+                            td 18%
+                            td Jul 22, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                          tr
+                            td 2
+                            td Alpha project
+                            td Alice Jackson
+                            td 0500 780909
+                            td Nec Euismod In Company
+                            td
+                              span.pie(style='display: none;') 2/3
+                              svg.peity(height='16' width='16')
+                                path(d='M 8 0 A 8 8 0 1 1 1.0717967697244921 12.000000000000004 L 8 8' fill='#62cb31')
+                                path(d='M 1.0717967697244921 12.000000000000004 A 8 8 0 0 1 7.999999999999998 0 L 8 8' fill='#edf0f5')
+                            td 40%
+                            td Jul 16, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                          tr
+                            td 1
+                            td
+                              | Project 
+                              small This is example of project
+                            td Patrick Smith
+                            td 0800 051213
+                            td Inceptos Hymenaeos Ltd
+                            td
+                              span.pie(style='display: none;') 1/5
+                              svg.peity(height='16' width='16')
+                                path(d='M 8 0 A 8 8 0 0 1 15.60845213036123 5.52786404500042 L 8 8' fill='#62cb31')
+                                path(d='M 15.60845213036123 5.52786404500042 A 8 8 0 1 1 7.999999999999998 0 L 8 8' fill='#edf0f5')
+                            td 20%
+                            td Jul 14, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                          tr
+                            td 4
+                            td Gamma project
+                            td Anna Jordan
+                            td (016977) 0648
+                            td Tellus Ltd
+                            td
+                              span.pie(style='display: none;') 10/50
+                              svg.peity(height='16' width='16')
+                                path(d='M 8 0 A 8 8 0 0 1 15.60845213036123 5.52786404500042 L 8 8' fill='#62cb31')
+                                path(d='M 15.60845213036123 5.52786404500042 A 8 8 0 1 1 7.999999999999998 0 L 8 8' fill='#edf0f5')
+                            td 18%
+                            td Jul 22, 2013
+                            td
+                              a(href='#')
+                                i.fa.fa-check.text-success
+                #tab-2.tab-pane
+                  .panel-body.no-padding
+                    .chat-discussion(style='height: auto')
+                      include mensajes
+    // Right sidebar
+    #right-sidebar.animated.fadeInRight
+      .p-m
+        button#sidebar-close.right-sidebar-toggle.sidebar-button.btn.btn-default.m-b-md
+          i.pe.pe-7s-close
+        div
+          span.font-bold.no-margins  Analytics 
+          br
+          small  Lorem Ipsum is simply dummy text of the printing simply all dummy text.
+        .row.m-t-sm.m-b-sm
+          .col-lg-6
+            h3.no-margins.font-extra-bold.text-success 300,102
+            .font-bold
+              | 98% 
+              i.fa.fa-level-up.text-success
+          .col-lg-6
+            h3.no-margins.font-extra-bold.text-success 280,200
+            .font-bold
+              | 98% 
+              i.fa.fa-level-up.text-success
+        .progress.m-t-xs.full.progress-small
+          .progress-bar.progress-bar-success(style='width: 25%' aria-valuemax='100' aria-valuemin='0' aria-valuenow='25' role='progressbar')
+            span.sr-only 35% Complete (success)
+      .p-m.bg-light.border-bottom.border-top
+        span.font-bold.no-margins  Social talks 
+        br
+        small  Lorem Ipsum is simply dummy text of the printing simply all dummy text.
+        .m-t-md
+          .social-talk
+            .media.social-profile.clearfix
+              a.pull-left
+                img(src='images/a1.jpg' alt='profile-picture')
+              .media-body
+                span.font-bold John Novak
+                small.text-muted 21.03.2015
+                .social-content.small
+                  | Injected humour, or randomised words which don&apos;t look even slightly believable.
+          .social-talk
+            .media.social-profile.clearfix
+              a.pull-left
+                img(src='images/a3.jpg' alt='profile-picture')
+              .media-body
+                span.font-bold Mark Smith
+                small.text-muted 14.04.2015
+                .social-content
+                  | Many desktop publishing packages and web page editors.
+          .social-talk
+            .media.social-profile.clearfix
+              a.pull-left
+                img(src='images/a4.jpg' alt='profile-picture')
+              .media-body
+                span.font-bold Marica Morgan
+                small.text-muted 21.03.2015
+                .social-content
+                  | There are many variations of passages of Lorem Ipsum available, but the majority have
+      .p-m
+        span.font-bold.no-margins  Sales in last week 
+        .m-t-xs
+          .row
+            .col-xs-6
+              small Today
+              h4.m-t-xs
+                | $170,20 
+                i.fa.fa-level-up.text-success
+            .col-xs-6
+              small Last week
+              h4.m-t-xs
+                | $580,90 
+                i.fa.fa-level-up.text-success
+          .row
+            .col-xs-6
+              small Today
+              h4.m-t-xs
+                | $620,20 
+                i.fa.fa-level-up.text-success
+            .col-xs-6
+              small Last week
+              h4.m-t-xs
+                | $140,70 
+                i.fa.fa-level-up.text-success
+        small
+          | Lorem Ipsum is simply dummy text of the printing simply all dummy text.
+          | Many desktop publishing packages and web page editors.
+    // Footer
+    footer.footer
+      span.pull-right
+        | Example text
+      |         Company 2015-2020

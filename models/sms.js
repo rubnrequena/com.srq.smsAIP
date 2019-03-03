@@ -2,7 +2,7 @@ let mongo = require('mongoose');
     
 let smsSchema = new mongo.Schema({
     hash: String,
-    usuario:mongo.SchemaTypes.ObjectId,
+    usuario:{type:mongo.Schema.Types.ObjectId,ref:"Usuario"},
     numero:{
         type:String,
         required:true
@@ -33,5 +33,8 @@ let smsSchema = new mongo.Schema({
     },
     minero: String
 });
-
+smsSchema.methods.recibidoStamp = function () {
+    var d = new Date(this.recibido);
+    return d.toLocaleDateString()+" "+d.toLocaleTimeString();
+}
 module.exports = mongo.model('sms',smsSchema);

@@ -1,8 +1,11 @@
 let Sms = require('../models/sms');
 var md5 = require("md5");
+var Usuario = require('../models/usuario');
 
 module.exports = {
-    enviar : async (user,sms,cb) => {
+    enviar : async (user,sms) => {
+        if (!user.activo) return 1001;
+        if (user.smsDisponibles<1) return 1002;
         var now = new Date();
         let s = new Sms({
             usuario:user._id,
@@ -11,6 +14,12 @@ module.exports = {
             recibido:now.getTime()
         });
         s.hash = md5(s.usuario+s.numero+s.texto+s.recibido);
+
+        user.smsDisponibles--;
+        Usuario.updateOne({_id:user._id},{smsDisponibles:user.smsDisponibles},(err,res) => {
+            if (err) next(err); //capturar error
+        })
+
         return await s.save();
     },
     queue: async (req) => {

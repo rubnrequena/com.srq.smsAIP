@@ -1,11 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var smsControl = require('../controllers/SmsControl');
+var Usuario = require('../models/usuario');
 
-router.get('/enviar/:num/:txt',async (req,res,next)=>{
-    let sms = await smsControl.enviar(req.params);
-    if (sms) res.json(sms);
-    else console.log(err);
+router.get('/enviar/:num/:txt/:key',async (req,res,next)=>{
+    let u = await Usuario.findById(req.params.key);
+    let sms = await smsControl.enviar(u,req.params);
+    if (sms) {
+        if (sms==1001) res.status(401).json({code:sms,msg:"usuario inactivo"})
+        if (sms==1002) res.status(401).json({code:sms,msg:"saldo insuficiente"})
+        else res.json({code:200,sms:sms});
+    } else res.status(400).send({code:401,msg:"mensaje no enviado"});
 })
 router.get('/enviar/:num/:txt/:repetir',async (req,res,next)=>{
     let rpt = req.params.repetir || 10;

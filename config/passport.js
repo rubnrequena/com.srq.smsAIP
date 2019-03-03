@@ -34,3 +34,6 @@ exports.esSuperAdmin = (req,res,next) => {
   if (req.isAuthenticated() && req.user.tipo=="su") return next();
   return next({status:401,message:"No tiene autorizacion para acceder al contenido"})
 }
+exports.esUsuario = (req,res,next) => {
+  next();
+}

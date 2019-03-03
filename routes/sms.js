@@ -3,6 +3,7 @@ var router = express.Router();
 var md5 = require("md5");
 const auth = require('../config/passport');
 
+const Usuario = require('../models/usuario');
 var smsControl = require('../controllers/SmsControl');
 let Sms = require('../models/sms');
 
@@ -11,9 +12,12 @@ router.get('/', auth.estaAutenticado, function(req, res, next) {
     res.render("sendSMS");
 })
 router.post('/',auth.estaAutenticado, async (req, res, next) => {
-    let sms = await smsControl.enviar(req.user,req.body);
-    if (sms) res.render("sendSMS",{message:"Mensaje enviado"});
-    else console.log(err);
+    if (req.user.smsDisponibles>0) {
+        let sms = await smsControl.enviar(req.user,req.body);
+        if (sms) {            
+            res.render("sendSMS",{message:"Mensaje enviado"});
+        } else next({state:1001,message:"Mensaje no enviado"})
+    } else next({state:1001,message:"Mensaje no enviado, saldo insuficiente"})
 })
 router.get('/all',(req,res,next)=>{
     let lm = parseInt(req.query.limit) || 20;

@@ -9,6 +9,13 @@ $(document).ready(function () {
     // Add special class to minimalize page elements when screen is less than 768px
     setBodySmall();
 
+    //custom
+    $('.s2').select2();
+
+    /*$('form.ajax').submit((e) => {
+        e.preventDefault(e);        
+    })*/
+
     // Handle minimalize sidebar menu
     $('.hide-menu').on('click', function(event){
         event.preventDefault();

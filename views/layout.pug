@@ -1,19 +1,20 @@
 doctype html
 html
   head
-    meta(charset='utf-8')
-    meta(name='viewport',content='width=device-width, initial-scale=1.0')
-    meta(http-equiv='X-UA-Compatible',content='IE=edge')
-    title= title
-    // Vendor styles
-    link(rel='stylesheet' href='/vendor/fontawesome/css/font-awesome.css')
-    link(rel='stylesheet' href='/vendor/metisMenu/dist/metisMenu.css')
-    link(rel='stylesheet' href='/vendor/animate.css/animate.css')
-    link(rel='stylesheet' href='/vendor/bootstrap/dist/css/bootstrap.css')
-    // App styles
-    link(rel='stylesheet' href='/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css')
-    link(rel='stylesheet' href='/fonts/pe-icon-7-stroke/css/helper.css')
-    link(rel='stylesheet' href='/styles/style.css')
+    block header
+      meta(charset='utf-8')
+      meta(name='viewport',content='width=device-width, initial-scale=1.0')
+      meta(http-equiv='X-UA-Compatible',content='IE=edge')
+      title= title
+      // Vendor styles
+      link(rel='stylesheet' href='/vendor/fontawesome/css/font-awesome.css')
+      link(rel='stylesheet' href='/vendor/metisMenu/dist/metisMenu.css')
+      link(rel='stylesheet' href='/vendor/animate.css/animate.css')
+      link(rel='stylesheet' href='/vendor/bootstrap/dist/css/bootstrap.css')
+      // App styles
+      link(rel='stylesheet' href='/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css')
+      link(rel='stylesheet' href='/fonts/pe-icon-7-stroke/css/helper.css')
+      link(rel='stylesheet' href='/styles/style.css')
   body
     // Simple splash screen
   .splash
@@ -35,9 +36,7 @@ html
       |  browser. Please 
       a(href='http://browsehappy.com/') upgrade your browser
       |  to improve your experience.
-  block content
-  // Vendor scripts
-  
+  block content    
   block footer
     script(src='/vendor/jquery/dist/jquery.min.js')
     script(src='/vendor/jquery-ui/jquery-ui.min.js')
