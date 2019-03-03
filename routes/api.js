@@ -3,9 +3,9 @@ var router = express.Router();
 var smsControl = require('../controllers/SmsControl');
 var Usuario = require('../models/usuario');
 
-router.get('/enviar/:num/:txt/:key',async (req,res,next)=>{
+router.get('/enviar/:key',async (req,res,next)=>{
     let u = await Usuario.findById(req.params.key);
-    let sms = await smsControl.enviar(u,req.params);
+    let sms = await smsControl.enviar(u,req.query);
     if (sms) {
         if (sms==1001) res.status(401).json({code:sms,msg:"usuario inactivo"})
         if (sms==1002) res.status(401).json({code:sms,msg:"saldo insuficiente"})
