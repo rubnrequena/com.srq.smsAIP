@@ -6,12 +6,11 @@ module.exports = {
     enviar : async (user,sms) => {
         if (!user.activo) return 1001;
         if (user.smsDisponibles<1) return 1002;
-        var now = new Date();
         let s = new Sms({
             usuario:user._id,
             numero:sms.num,
             texto:sms.txt,
-            recibido:now.getTime()
+            recibido:new Date
         });
         s.hash = md5(s.usuario+s.numero+s.texto+s.recibido);
 
@@ -28,8 +27,7 @@ module.exports = {
         return q;
     },
     claimReward: async (id) => {
-        let now = new Date().getTime();
-        let sms = await Sms.updateOne({_id:id},{enviado:now});        
+        let sms = await Sms.updateOne({_id:id},{enviado:new Date});        
         return sms;
     }
 };

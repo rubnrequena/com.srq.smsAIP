@@ -62,7 +62,7 @@ router.post("/recargar",auth.esSuperAdmin,async (req,res,next) => {
     recibo:req.body.recibo,
     monto:req.body.monto,
     pkg:pkg._id,
-    registro:new Date().getTime()
+    registro:new Date()
   });
 
   rch.save(async (err) => {

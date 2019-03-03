@@ -16,21 +16,10 @@ let smsSchema = new mongo.Schema({
         type:Number,
         default:0
     },
-    enviado:{
-     type:Number,
-     default:0,
-    },
-    recibido:{
-        type:Number,
-        default:0,     
-    },
-    capturado:{
-        type:Number,
-        default:0,    
-    },
-    expira:{
-        type:Number
-    },
+    enviado:Date,
+    recibido:Date,
+    capturado:Date,
+    expira:Number,
     minero: String
 });
 smsSchema.methods.recibidoStamp = function () {
