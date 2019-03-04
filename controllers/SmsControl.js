@@ -28,7 +28,7 @@ module.exports = {
     },
     queue: async (req) => {
         let lm = parseInt(req.limit) || 10;
-        let q = await Sms.find({enviado:null}).sort({recibido:-1}).limit(lm);        
+        let q = await Sms.find({minado:{$exists:false}}).sort({recibido:-1}).limit(lm);        
         return q;
     },
     claimReward: async (id) => {

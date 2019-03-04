@@ -27,47 +27,45 @@ router.get('/all',(req,res,next)=>{
     }).sort({recibido:-1}).limit(lm);
 })
 router.get('/restore',(req,res,next)=>{
-    Sms.updateMany({enviado:-1},{enviado:0,$unset:{minero:false}},(err,raw)=>{
+    Sms.updateMany({enviado:null},{enviado:0,$unset:{minero:false}},(err,raw)=>{
         if (err) console.log(err);
         res.json(raw);
     });
 })
-router.get('/minado/:hash',(req,res,next)=>{
+router.get('/minado/:device/:hash',(req,res,next)=>{
     Sms.findById(req.params.hash,(err,sms)=>{
-        if (err) console.log(err)
-        else {
-            if (sms) {
-                //TODO validar sesion minero
-                if (sms.capturado>0) {
-                    sms.enviado = Date.now();
-                    sms.save();
-                    res.json({
-                        code:1
-                    });
-                    //TODO guardar recomensa
-                } else res.json({
-                    code:0,
-                    error: "message has not been sent"
-                });
-            } else {
-                res.json({
-                    code:0,
-                    error:"message do not exist"
-                });
+        if (err) next(err)
+        else {            
+            if (!sms) res.json({ error:"mensaje no existe"});
+            else {
+                if (!sms.minado) res.json({ error:"mensaje aun en cola"});
+                else {
+                    if (sms.minado.dev!=req.params.device) res.json({ error:"minero invalido"});
+                    else {
+                        if (sms.enviado) res.json({ error:"recompensa tomada"});
+                        else {            
+                            sms.enviado = new Date;
+                            sms.save();
+                            res.json(sms);
+                        }
+                    }
+                }
             }
         }
     })
 })
-router.get('/minero/',(req,res,next)=>{
-    Sms.findOne({enviado:null},(err,sms)=>{
+
+router.get('/minero/:device',(req,res,next)=>{
+    Sms.findOne({minado:{$exists:false}},(err,sms)=>{
         var rs = {};
         if (sms) {
             rs.code = "ok";
             rs.sms = sms;
             res.json(rs);
-            //marcar como pendiente            
-            sms.minero = "dev";
-            sms.capturado = new Date;
+            sms.minado = {
+                cap: new Date,
+                dev: req.params.device //validar dispositivo                
+            }
             sms.save();
         } else {
             rs.code="none";
