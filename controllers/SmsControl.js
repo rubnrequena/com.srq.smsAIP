@@ -4,6 +4,7 @@ var Usuario = require('../models/usuario');
 
 module.exports = {
     enviar : async (user,sms) => {
+        if (!user) return 1000;
         if (!user.activo) return 1001;
         if (user.smsDisponibles<1) return 1002;
         let s = new Sms({

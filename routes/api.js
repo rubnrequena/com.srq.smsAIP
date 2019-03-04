@@ -7,6 +7,7 @@ router.get('/enviar/:key',async (req,res,next)=>{
     let u = await Usuario.findById(req.params.key);
     let sms = await smsControl.enviar(u,req.query);
     if (sms) {
+        if (sms==1000) res.status(401).json({code:sms,msg:"usuario no registrado"})
         if (sms==1001) res.status(401).json({code:sms,msg:"usuario inactivo"})
         if (sms==1002) res.status(401).json({code:sms,msg:"saldo insuficiente"})
         else res.json({code:200,sms:sms});
