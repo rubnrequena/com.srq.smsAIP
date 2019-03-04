@@ -3,6 +3,10 @@ var md5 = require("md5");
 var Usuario = require('../models/usuario');
 
 module.exports = {
+    all : async (limit) => {
+        let d = await Sms.find({}).limit(limit);        
+        return d;
+    },
     enviar : async (user,sms) => {
         if (!user) return 1000;
         if (!user.activo) return 1001;
@@ -24,7 +28,7 @@ module.exports = {
     },
     queue: async (req) => {
         let lm = parseInt(req.limit) || 10;
-        let q = await Sms.find({enviado:0}).sort({recibido:-1}).limit(lm);        
+        let q = await Sms.find({enviado:null}).sort({recibido:-1}).limit(lm);        
         return q;
     },
     claimReward: async (id) => {

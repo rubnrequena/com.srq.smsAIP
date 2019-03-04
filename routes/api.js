@@ -33,4 +33,16 @@ router.get('/queue', async (req,res,next)=>{
     let r = await smsControl.queue(req.query);
     res.json(r);
 })
+router.get('/all', async (req,res,next) => {
+    let mensajes = await smsControl.all(req.query.limit||10);
+    res.json(mensajes);
+})
+
+router.get("/usuario/:id",(req,res,next) => {
+    Usuario.findById(req.params.id,(err,usuario) => {
+        if (err) next(err);        
+        if (usuario) res.json(usuario);
+        else res.json({code:1000,msg:"usuario no registrado"});
+    })
+})
 module.exports = router;

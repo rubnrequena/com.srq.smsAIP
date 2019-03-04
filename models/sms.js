@@ -16,7 +16,10 @@ let smsSchema = new mongo.Schema({
         type:Number,
         default:0
     },
-    enviado:Date,
+    enviado:{
+        type:Date,
+        default:""
+    },
     recibido:Date,
     capturado:Date,
     expira:Number,
