@@ -7,4 +7,5 @@ let paqSq = new mongo.Schema({
   duracion:Number
 })
 
+module.exports.all = [];
 module.exports = mongo.model("Paquete",paqSq);

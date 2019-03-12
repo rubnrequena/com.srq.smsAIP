@@ -28,9 +28,10 @@ server.on('listening', onListening);
 /**
  * Connect DBs
  */
-mongoose.connect("mongodb://dario:dario123@ds139985.mlab.com:39985/srqhermes",{useNewUrlParser: true},(err)=> {
+let mongorc = require("../config/mongo");
+mongoose.connect(mongorc.uriLocal,{useNewUrlParser: true},(err)=> {
   if (err) console.log("Error al conectar con Mongo");
-  console.log('conectado a mongoDB');
+  else console.log('conectado a mongoDB');
   server.listen(port);
 });
 

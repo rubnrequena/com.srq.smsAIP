@@ -39,11 +39,14 @@ html
       |  browser. Please 
       a(href='http://browsehappy.com/') upgrade your browser
       |  to improve your experience.
-  block content 
+  include menu/cabeza  
+  include menu/lateral
+  #wrapper
+    block content 
     footer.footer
       span.pull-right
         | &copy; SRQ 2019
-      |         mSRQ Nube de Mensajeria  
+      |         mSRQ Nube de Mensajeria
   block footer
     script(src='/vendor/jquery/dist/jquery.min.js')
     script(src='/vendor/jquery-ui/jquery-ui.min.js')

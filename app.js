@@ -9,13 +9,14 @@ const passport = require('passport');
 const auth = require('./config/passport');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usuariosRouter = require('./routes/usuario');
 var smsRouter = require('./routes/sms');
 var apiRouter = require('./routes/api');
 
 var CronJob = require('cron/lib/cron.js').CronJob;
-const job = new CronJob('*/5 * * * * *', require('./controllers/RestaurarHuerfanos'));
-//job.start();
+const resHuerfanos = require('./controllers/RestaurarHuerfanos');
+const job = new CronJob(resHuerfanos.retraso, resHuerfanos.job);
+job.start();
 
 var app = express(); 
 
@@ -29,13 +30,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+let mongorc = require("./config/mongo");
 app.use(session({
   secret: 'sms-secret-52', 
   //cookie: { maxAge: 60000 * 5 }, 
   resave: false, 
   saveUninitialized: false,
   store: new mongoStore({
-    url:'mongodb://dario:dario123@ds139985.mlab.com:39985/srqhermes',
+    url:mongorc.uriLocal,
     autoReconnect:true
   })
  }));
@@ -44,7 +46,7 @@ app.use(passport.initialize());
 app.use(passport.session()); 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/usuario', usuariosRouter);
 app.use('/sms',smsRouter);
 app.use('/api',apiRouter);
 

@@ -1,7 +1,7 @@
 aside#menu
   #navigation
     .profile-picture
-      a(href='index.html')
+      a(href='/')
         img.img-circle.m-b(src='images/profile.jpg' alt='logo')
       .stats-label.text-color
         span.font-extra-bold.font-uppercase= usuario.nombre
@@ -27,12 +27,17 @@ aside#menu
         a(href='/sms')
           span.nav-label Enviar SMS
           span.label.label-warning.pull-right NEW
-      li
-        a(href='#')
-          span.nav-label Usuarios
-          span.fa.arrow
-        ul.nav.nav-second-level
-          li
-            a(href='/registrar') Registrar
-          li
-            a(href='/recargar') Recargar 
+      if usuario.tipo=="su"
+        li
+          a(href='#')
+            span.nav-label Usuarios
+            span.fa.arrow
+          ul.nav.nav-second-level
+            li
+              a(href='/registrar') Registrar
+            li
+              a(href='/recargar') Recargar 
+      else
+        li
+          a(href='/recarga/solicitud')
+            span.nav-label Recargar

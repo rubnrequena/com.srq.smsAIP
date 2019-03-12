@@ -9,26 +9,26 @@ let Sms = require('../models/sms');
 
 /* GET home page. */
 router.get('/', auth.estaAutenticado, function(req, res, next) {
-    res.render("sendSMS");
+    res.render("sendSMS",{usuario:req.user});
 })
 router.post('/',auth.estaAutenticado, async (req, res, next) => {
     if (req.user.smsDisponibles>0) {
         let sms = await smsControl.enviar(req.user,req.body);
         if (sms) {            
-            res.render("sendSMS",{message:"Mensaje enviado"});
+            res.render("sendSMS",{usuario:req.user,message:"Mensaje enviado"});
         } else next({state:1001,message:"Mensaje no enviado"})
     } else next({state:1001,message:"Mensaje no enviado, saldo insuficiente"})
 })
 router.get('/all',(req,res,next)=>{
     let lm = parseInt(req.query.limit) || 20;
     Sms.find({},(err,mensajes)=>{
-        if (err) console.log(err);
+        if (err) next(err)
         res.json(mensajes);
     }).sort({recibido:-1}).limit(lm);
 })
 router.get('/restore',(req,res,next)=>{
     Sms.updateMany({enviado:null},{enviado:0,$unset:{minero:false}},(err,raw)=>{
-        if (err) console.log(err);
+        if (err) next(err);
         res.json(raw);
     });
 })

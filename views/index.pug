@@ -1,403 +1,392 @@
-extends layout
+extends layoutMenu
 
 block content
-  include header_menu  
-  // Navigation
-  include side_menu
-  // Main Wrapper
-  #wrapper
-    .content.animate-panel
-      .row
-        .col-lg-12.text-center.m-t-md
-          h2
-            | Welcome to Homer Theme
-          p
-            | Special 
-            strong Admin Theme
-            |  for small, medium and large webapp with very clean and
-            |                     aesthetic style and feel.
-      .row
-        .col-lg-12
-          .hpanel
-            .panel-heading
-              .panel-tools
-                a.showhide
-                  i.fa.fa-chevron-up
-                a.closebox
-                  i.fa.fa-times
-              |                         Dashboard information and statistics
-            .panel-body
+  //content
+  .content.animate-panel
+    .row
+      .col-lg-12.text-center.m-t-md
+        h2
+          | Welcome to Homer Theme
+        p
+          | Special 
+          strong Admin Theme
+          |  for small, medium and large webapp with very clean and
+          |                     aesthetic style and feel.
+    .row
+      .col-lg-12
+        .hpanel
+          .panel-heading
+            .panel-tools
+              a.showhide
+                i.fa.fa-chevron-up
+              a.closebox
+                i.fa.fa-times
+            |                         Dashboard information and statistics
+          .panel-body
+            .row
+              .col-md-3.text-center
+                .small
+                  i.fa.fa-bolt
+                  |  Page views
+                div
+                  h1.font-extra-bold.m-t-xl.m-b-xs
+                    | 226,802
+                  small Page views in last month
+                .small.m-t-xl
+                  i.fa.fa-clock-o
+                  |  Data from January
+              .col-md-6
+                .text-center.small
+                  i.fa.fa-laptop
+                  |  Active users in current month (December)
+                .flot-chart(style='height: 160px')
+                  #flot-line-chart.flot-chart-content
+              .col-md-3.text-center
+                .small
+                  i.fa.fa-clock-o
+                  |  Active duration
+                div
+                  h1.font-extra-bold.m-t-xl.m-b-xs
+                    | 10 Months
+                  small And four weeks
+                .small.m-t-xl
+                  i.fa.fa-clock-o
+                  |  Last active in 12.10.2015
+          .panel-footer
+            span.pull-right
+              | You have two new messages from 
+              a(href='') Monica Bolt
+            |                         Last update: 21.05.2015
+    .row
+      .col-lg-3
+        .hpanel
+          .panel-body.text-center.h-200
+            i.pe-7s-graph1.fa-4x
+            h1.m-xs $1 206,90
+            h3.font-extra-bold.no-margins.text-success
+              | All Income
+            small Lorem ipsum dolor sit amet, consectetur adipiscing elit vestibulum.
+          .panel-footer
+            | This is standard panel footer
+      .col-lg-3
+        .hpanel.stats
+          .panel-body.h-200
+            .stats-title.pull-left
+              h4 Users Activity
+            .stats-icon.pull-right
+              i.pe-7s-share.fa-4x
+            .m-t-xl
+              h3.m-b-xs 210
+              span.font-bold.no-margins
+                | Social users
+              .progress.m-t-xs.full.progress-small
+                .progress-bar.progress-bar-success(style='width: 55%' aria-valuemax='100' aria-valuemin='0' aria-valuenow='55' role='progressbar')
+                  span.sr-only 35% Complete (success)
               .row
-                .col-md-3.text-center
-                  .small
-                    i.fa.fa-bolt
-                    |  Page views
-                  div
-                    h1.font-extra-bold.m-t-xl.m-b-xs
-                      | 226,802
-                    small Page views in last month
-                  .small.m-t-xl
-                    i.fa.fa-clock-o
-                    |  Data from January
-                .col-md-6
-                  .text-center.small
-                    i.fa.fa-laptop
-                    |  Active users in current month (December)
-                  .flot-chart(style='height: 160px')
-                    #flot-line-chart.flot-chart-content
-                .col-md-3.text-center
-                  .small
-                    i.fa.fa-clock-o
-                    |  Active duration
-                  div
-                    h1.font-extra-bold.m-t-xl.m-b-xs
-                      | 10 Months
-                    small And four weeks
-                  .small.m-t-xl
-                    i.fa.fa-clock-o
-                    |  Last active in 12.10.2015
-            .panel-footer
-              span.pull-right
-                | You have two new messages from 
-                a(href='') Monica Bolt
-              |                         Last update: 21.05.2015
-      .row
-        .col-lg-3
-          .hpanel
-            .panel-body.text-center.h-200
-              i.pe-7s-graph1.fa-4x
-              h1.m-xs $1 206,90
-              h3.font-extra-bold.no-margins.text-success
-                | All Income
-              small Lorem ipsum dolor sit amet, consectetur adipiscing elit vestibulum.
-            .panel-footer
-              | This is standard panel footer
-        .col-lg-3
-          .hpanel.stats
-            .panel-body.h-200
-              .stats-title.pull-left
-                h4 Users Activity
-              .stats-icon.pull-right
-                i.pe-7s-share.fa-4x
-              .m-t-xl
-                h3.m-b-xs 210
-                span.font-bold.no-margins
-                  | Social users
-                .progress.m-t-xs.full.progress-small
-                  .progress-bar.progress-bar-success(style='width: 55%' aria-valuemax='100' aria-valuemin='0' aria-valuenow='55' role='progressbar')
-                    span.sr-only 35% Complete (success)
-                .row
-                  .col-xs-6
-                    small.stats-label Pages / Visit
-                    h4 7.80
-                  .col-xs-6
-                    small.stats-label % New Visits
-                    h4 76.43%
-            .panel-footer
-              | This is standard panel footer
-        .col-lg-3
-          .hpanel.stats
-            .panel-body.h-200
-              .stats-title.pull-left
-                h4 Page Views
-              .stats-icon.pull-right
-                i.pe-7s-monitor.fa-4x
-              .m-t-xl
-                h1.text-success 860k+
-                span.font-bold.no-margins
-                  | Social users
-                br
-                small
-                  | Lorem Ipsum is simply dummy text of the printing and 
-                  strong
-                    | typesetting
-                    | industry
-                  | . Lorem Ipsum has been.
-            .panel-footer
-              | This is standard panel footer
-        .col-lg-3
-          .hpanel.stats
-            .panel-body.h-200
-              .stats-title.pull-left
-                h4 Today income
-              .stats-icon.pull-right
-                i.pe-7s-cash.fa-4x
-              .clearfix
-              .flot-chart
-                #flot-income-chart.flot-chart-content
-              .m-t-xs
-                .row
-                  .col-xs-5
-                    small.stat-label Today
-                    h4 $230,00 
-                  .col-xs-7
-                    small.stat-label Last week
-                    h4
-                      | $7 980,60 
-                      i.fa.fa-level-up.text-success
-            .panel-footer
-              | This is standard panel footer
-      .row
-        .col-lg-3
-          .hpanel.stats
-            .panel-heading
-              .panel-tools
-                a.showhide
-                  i.fa.fa-chevron-up
-                a.closebox
-                  i.fa.fa-times
-              |                         Last active
-            .panel-body.list
-              .stats-title.pull-left
-                h4 Activity
-              .stats-icon.pull-right
-                i.pe-7s-science.fa-4x
-              .m-t-xl
-                span.font-bold.no-margins
-                  | Social users
-                br
-                small
-                  | Lorem Ipsum is simply dummy text of the printing simply all dummy text. Lorem Ipsum is
-                  | simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.
-              .row.m-t-md
-                .col-lg-6
-                  h3.no-margins.font-extra-bold.text-success 300,102
-                  .font-bold
-                    | 98% 
+                .col-xs-6
+                  small.stats-label Pages / Visit
+                  h4 7.80
+                .col-xs-6
+                  small.stats-label % New Visits
+                  h4 76.43%
+          .panel-footer
+            | This is standard panel footer
+      .col-lg-3
+        .hpanel.stats
+          .panel-body.h-200
+            .stats-title.pull-left
+              h4 Page Views
+            .stats-icon.pull-right
+              i.pe-7s-monitor.fa-4x
+            .m-t-xl
+              h1.text-success 860k+
+              span.font-bold.no-margins
+                | Social users
+              br
+              small
+                | Lorem Ipsum is simply dummy text of the printing and 
+                strong
+                  | typesetting
+                  | industry
+                | . Lorem Ipsum has been.
+          .panel-footer
+            | This is standard panel footer
+      .col-lg-3
+        .hpanel.stats
+          .panel-body.h-200
+            .stats-title.pull-left
+              h4 Today income
+            .stats-icon.pull-right
+              i.pe-7s-cash.fa-4x
+            .clearfix
+            .flot-chart
+              #flot-income-chart.flot-chart-content
+            .m-t-xs
+              .row
+                .col-xs-5
+                  small.stat-label Today
+                  h4 $230,00 
+                .col-xs-7
+                  small.stat-label Last week
+                  h4
+                    | $7 980,60 
                     i.fa.fa-level-up.text-success
-                .col-lg-6
-                  h3.no-margins.font-extra-bold.text-success 280,200
-                  .font-bold
-                    | 98% 
-                    i.fa.fa-level-up.text-success
-              .row.m-t-md
-                .col-lg-6
-                  h3.no-margins.font-extra-bold 120,108
-                  .font-bold
-                    | 38% 
-                    i.fa.fa-level-down
-                .col-lg-6
-                  h3.no-margins.font-extra-bold 450,600
-                  .font-bold
-                    | 28% 
-                    i.fa.fa-level-down
-            .panel-footer
-              | This is standard panel footer
-        .col-lg-6
-          .hpanel
-            .panel-heading
-              .panel-tools
-                a.showhide
-                  i.fa.fa-chevron-up
-                a.closebox
-                  i.fa.fa-times
-              |                         Recently active projects
-            .panel-body.list
-              .table-responsive.project-list
-                table.table.table-striped
-                  thead
-                    tr
-                      th(colspan='2') Project
-                      th Completed
-                      th Task
-                      th Date
-                      th Action
-                  tbody
-                    tr
-                      td
-                        input.i-checks(type='checkbox' checked='')
-                      td
-                        | Contract with Zender Company
-                        br
-                        small
-                          i.fa.fa-clock-o
-                          |  Created 14.08.2015
-                      td
-                        span.pie 1/5
-                      td
-                        strong 20%
-                      td Jul 14, 2013
-                      td
-                        a(href='')
-                          i.fa.fa-check.text-success
-                    tr
-                      td
-                        input.i-checks(type='checkbox')
-                      td
-                        | There are many variations of passages
-                        br
-                        small
-                          i.fa.fa-clock-o
-                          |  Created 21.07.2015
-                      td
-                        span.pie 1/4
-                      td
-                        strong 40%
-                      td Jul 16, 2013
-                      td
-                        a(href='')
-                          i.fa.fa-check.text-navy
-                    tr
-                      td
-                        input.i-checks(type='checkbox' checked='')
-                      td
-                        | Contrary to popular belief
-                        br
-                        small
-                          i.fa.fa-clock-o
-                          |  Created 12.06.2015
-                      td
-                        span.pie 0.52/1.561
-                      td
-                        strong 75%
-                      td Jul 18, 2013
-                      td
-                        a(href='')
-                          i.fa.fa-check.text-navy
-                    tr
-                      td
-                        input.i-checks(type='checkbox')
-                      td
-                        | Gamma project
-                        br
-                        small
-                          i.fa.fa-clock-o
-                          |  Created 06.03.2015
-                      td
-                        span.pie 226/360
-                      td
-                        strong 16%
-                      td Jul 22, 2013
-                      td
-                        a(href='')
-                          i.fa.fa-check.text-navy
-        .col-lg-3
-          .hpanel
-            .panel-heading
-              .panel-tools
-                a.showhide
-                  i.fa.fa-chevron-up
-                a.closebox
-                  i.fa.fa-times
-              |                         Activity
-            .panel-body.list
-              .pull-right
-                a.btn.btn-xs.btn-default(href='#') Today
-                a.btn.btn-xs.btn-default(href='#') Month
-              .panel-title Last Activity
-              small.fo This is simple example
-              .list-item-container
-                .list-item
-                  h3.no-margins.font-extra-bold.text-success 2,773
-                  small Tota Messages Sent
-                  .pull-right.font-bold
-                    | 98% 
-                    i.fa.fa-level-up.text-success
-                .list-item
-                  h3.no-margins.font-extra-bold.text-color3 4,422
-                  small Last activity
-                  .pull-right.font-bold
-                    | 13% 
-                    i.fa.fa-level-down.text-color3
-                .list-item
-                  h3.no-margins.font-extra-bold.text-color3 9,180
-                  small Monthly income
-                  .pull-right.font-bold
-                    | 22% 
-                    i.fa.fa-bolt.text-color3
-                .list-item
-                  h3.no-margins.font-extra-bold.text-success 1,450
-                  small Tota Messages Sent
-                  .pull-right.font-bold
-                    | 44% 
-                    i.fa.fa-level-up.text-success
-    // Right sidebar
-    #right-sidebar.animated.fadeInRight
-      .p-m
-        button#sidebar-close.right-sidebar-toggle.sidebar-button.btn.btn-default.m-b-md
-          i.pe.pe-7s-close
-        div
-          span.font-bold.no-margins  Analytics 
-          br
-          small  Lorem Ipsum is simply dummy text of the printing simply all dummy text.
-        .row.m-t-sm.m-b-sm
-          .col-lg-6
-            h3.no-margins.font-extra-bold.text-success 300,102
-            .font-bold
-              | 98% 
-              i.fa.fa-level-up.text-success
-          .col-lg-6
-            h3.no-margins.font-extra-bold.text-success 280,200
-            .font-bold
-              | 98% 
-              i.fa.fa-level-up.text-success
-        .progress.m-t-xs.full.progress-small
-          .progress-bar.progress-bar-success(style='width: 25%' aria-valuemax='100' aria-valuemin='0' aria-valuenow='25' role='progressbar')
-            span.sr-only 35% Complete (success)
-      .p-m.bg-light.border-bottom.border-top
-        span.font-bold.no-margins  Social talks 
+          .panel-footer
+            | This is standard panel footer
+    .row
+      .col-lg-3
+        .hpanel.stats
+          .panel-heading
+            .panel-tools
+              a.showhide
+                i.fa.fa-chevron-up
+              a.closebox
+                i.fa.fa-times
+            |                         Last active
+          .panel-body.list
+            .stats-title.pull-left
+              h4 Activity
+            .stats-icon.pull-right
+              i.pe-7s-science.fa-4x
+            .m-t-xl
+              span.font-bold.no-margins
+                | Social users
+              br
+              small
+                | Lorem Ipsum is simply dummy text of the printing simply all dummy text. Lorem Ipsum is
+                | simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.
+            .row.m-t-md
+              .col-lg-6
+                h3.no-margins.font-extra-bold.text-success 300,102
+                .font-bold
+                  | 98% 
+                  i.fa.fa-level-up.text-success
+              .col-lg-6
+                h3.no-margins.font-extra-bold.text-success 280,200
+                .font-bold
+                  | 98% 
+                  i.fa.fa-level-up.text-success
+            .row.m-t-md
+              .col-lg-6
+                h3.no-margins.font-extra-bold 120,108
+                .font-bold
+                  | 38% 
+                  i.fa.fa-level-down
+              .col-lg-6
+                h3.no-margins.font-extra-bold 450,600
+                .font-bold
+                  | 28% 
+                  i.fa.fa-level-down
+          .panel-footer
+            | This is standard panel footer
+      .col-lg-6
+        .hpanel
+          .panel-heading
+            .panel-tools
+              a.showhide
+                i.fa.fa-chevron-up
+              a.closebox
+                i.fa.fa-times
+            |                         Recently active projects
+          .panel-body.list
+            .table-responsive.project-list
+              table.table.table-striped
+                thead
+                  tr
+                    th(colspan='2') Project
+                    th Completed
+                    th Task
+                    th Date
+                    th Action
+                tbody
+                  tr
+                    td
+                      input.i-checks(type='checkbox' checked='')
+                    td
+                      | Contract with Zender Company
+                      br
+                      small
+                        i.fa.fa-clock-o
+                        |  Created 14.08.2015
+                    td
+                      span.pie 1/5
+                    td
+                      strong 20%
+                    td Jul 14, 2013
+                    td
+                      a(href='')
+                        i.fa.fa-check.text-success
+                  tr
+                    td
+                      input.i-checks(type='checkbox')
+                    td
+                      | There are many variations of passages
+                      br
+                      small
+                        i.fa.fa-clock-o
+                        |  Created 21.07.2015
+                    td
+                      span.pie 1/4
+                    td
+                      strong 40%
+                    td Jul 16, 2013
+                    td
+                      a(href='')
+                        i.fa.fa-check.text-navy
+                  tr
+                    td
+                      input.i-checks(type='checkbox' checked='')
+                    td
+                      | Contrary to popular belief
+                      br
+                      small
+                        i.fa.fa-clock-o
+                        |  Created 12.06.2015
+                    td
+                      span.pie 0.52/1.561
+                    td
+                      strong 75%
+                    td Jul 18, 2013
+                    td
+                      a(href='')
+                        i.fa.fa-check.text-navy
+                  tr
+                    td
+                      input.i-checks(type='checkbox')
+                    td
+                      | Gamma project
+                      br
+                      small
+                        i.fa.fa-clock-o
+                        |  Created 06.03.2015
+                    td
+                      span.pie 226/360
+                    td
+                      strong 16%
+                    td Jul 22, 2013
+                    td
+                      a(href='')
+                        i.fa.fa-check.text-navy
+      .col-lg-3
+        .hpanel
+          .panel-heading
+            .panel-tools
+              a.showhide
+                i.fa.fa-chevron-up
+              a.closebox
+                i.fa.fa-times
+            |                         Activity
+          .panel-body.list
+            .pull-right
+              a.btn.btn-xs.btn-default(href='#') Today
+              a.btn.btn-xs.btn-default(href='#') Month
+            .panel-title Last Activity
+            small.fo This is simple example
+            .list-item-container
+              .list-item
+                h3.no-margins.font-extra-bold.text-success 2,773
+                small Tota Messages Sent
+                .pull-right.font-bold
+                  | 98% 
+                  i.fa.fa-level-up.text-success
+              .list-item
+                h3.no-margins.font-extra-bold.text-color3 4,422
+                small Last activity
+                .pull-right.font-bold
+                  | 13% 
+                  i.fa.fa-level-down.text-color3
+              .list-item
+                h3.no-margins.font-extra-bold.text-color3 9,180
+                small Monthly income
+                .pull-right.font-bold
+                  | 22% 
+                  i.fa.fa-bolt.text-color3
+              .list-item
+                h3.no-margins.font-extra-bold.text-success 1,450
+                small Tota Messages Sent
+                .pull-right.font-bold
+                  | 44% 
+                  i.fa.fa-level-up.text-success
+  // Right sidebar
+  #right-sidebar.animated.fadeInRight
+    .p-m
+      button#sidebar-close.right-sidebar-toggle.sidebar-button.btn.btn-default.m-b-md
+        i.pe.pe-7s-close
+      div
+        span.font-bold.no-margins  Analytics 
         br
         small  Lorem Ipsum is simply dummy text of the printing simply all dummy text.
-        .m-t-md
-          .social-talk
-            .media.social-profile.clearfix
-              a.pull-left
-                img(src='images/a1.jpg' alt='profile-picture')
-              .media-body
-                span.font-bold John Novak
-                small.text-muted 21.03.2015
-                .social-content.small
-                  | Injected humour, or randomised words which don&apos;t look even slightly believable.
-          .social-talk
-            .media.social-profile.clearfix
-              a.pull-left
-                img(src='images/a3.jpg' alt='profile-picture')
-              .media-body
-                span.font-bold Mark Smith
-                small.text-muted 14.04.2015
-                .social-content
-                  | Many desktop publishing packages and web page editors.
-          .social-talk
-            .media.social-profile.clearfix
-              a.pull-left
-                img(src='images/a4.jpg' alt='profile-picture')
-              .media-body
-                span.font-bold Marica Morgan
-                small.text-muted 21.03.2015
-                .social-content
-                  | There are many variations of passages of Lorem Ipsum available, but the majority have
-      .p-m
-        span.font-bold.no-margins  Sales in last week 
-        .m-t-xs
-          .row
-            .col-xs-6
-              small Today
-              h4.m-t-xs
-                | $170,20 
-                i.fa.fa-level-up.text-success
-            .col-xs-6
-              small Last week
-              h4.m-t-xs
-                | $580,90 
-                i.fa.fa-level-up.text-success
-          .row
-            .col-xs-6
-              small Today
-              h4.m-t-xs
-                | $620,20 
-                i.fa.fa-level-up.text-success
-            .col-xs-6
-              small Last week
-              h4.m-t-xs
-                | $140,70 
-                i.fa.fa-level-up.text-success
-        small
-          | Lorem Ipsum is simply dummy text of the printing simply all dummy text.
-          | Many desktop publishing packages and web page editors.
-    // Footer
-    footer.footer
-      span.pull-right
-        | Example text
-      |         Company 2015-2020
-  
-  
+      .row.m-t-sm.m-b-sm
+        .col-lg-6
+          h3.no-margins.font-extra-bold.text-success 300,102
+          .font-bold
+            | 98% 
+            i.fa.fa-level-up.text-success
+        .col-lg-6
+          h3.no-margins.font-extra-bold.text-success 280,200
+          .font-bold
+            | 98% 
+            i.fa.fa-level-up.text-success
+      .progress.m-t-xs.full.progress-small
+        .progress-bar.progress-bar-success(style='width: 25%' aria-valuemax='100' aria-valuemin='0' aria-valuenow='25' role='progressbar')
+          span.sr-only 35% Complete (success)
+    .p-m.bg-light.border-bottom.border-top
+      span.font-bold.no-margins  Social talks 
+      br
+      small  Lorem Ipsum is simply dummy text of the printing simply all dummy text.
+      .m-t-md
+        .social-talk
+          .media.social-profile.clearfix
+            a.pull-left
+              img(src='images/a1.jpg' alt='profile-picture')
+            .media-body
+              span.font-bold John Novak
+              small.text-muted 21.03.2015
+              .social-content.small
+                | Injected humour, or randomised words which don&apos;t look even slightly believable.
+        .social-talk
+          .media.social-profile.clearfix
+            a.pull-left
+              img(src='images/a3.jpg' alt='profile-picture')
+            .media-body
+              span.font-bold Mark Smith
+              small.text-muted 14.04.2015
+              .social-content
+                | Many desktop publishing packages and web page editors.
+        .social-talk
+          .media.social-profile.clearfix
+            a.pull-left
+              img(src='images/a4.jpg' alt='profile-picture')
+            .media-body
+              span.font-bold Marica Morgan
+              small.text-muted 21.03.2015
+              .social-content
+                | There are many variations of passages of Lorem Ipsum available, but the majority have
+    .p-m
+      span.font-bold.no-margins  Sales in last week 
+      .m-t-xs
+        .row
+          .col-xs-6
+            small Today
+            h4.m-t-xs
+              | $170,20 
+              i.fa.fa-level-up.text-success
+          .col-xs-6
+            small Last week
+            h4.m-t-xs
+              | $580,90 
+              i.fa.fa-level-up.text-success
+        .row
+          .col-xs-6
+            small Today
+            h4.m-t-xs
+              | $620,20 
+              i.fa.fa-level-up.text-success
+          .col-xs-6
+            small Last week
+            h4.m-t-xs
+              | $140,70 
+              i.fa.fa-level-up.text-success
+      small
+        | Lorem Ipsum is simply dummy text of the printing simply all dummy text.
+        | Many desktop publishing packages and web page editors.

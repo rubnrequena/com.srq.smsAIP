@@ -3,6 +3,12 @@ var md5 = require("md5");
 var Usuario = require('../models/usuario');
 
 module.exports = {
+    sms : async (id,next,err) => {
+       Sms.findById(id).then((err,sms) => {
+           console.log(sms);
+           next(sms);
+       }).catch(err);
+    },
     all : async (limit) => {
         let d = await Sms.find({}).limit(limit);        
         return d;

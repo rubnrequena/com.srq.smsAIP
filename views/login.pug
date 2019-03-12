@@ -5,7 +5,7 @@ html
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     // Page title
-    title HOMER | WebApp admin theme
+    title mSRQ | Iniciar sesion
     // Place favicon.ico and apple-touch-icon.png in the root directory
     // <link rel="shortcut icon" type="image/ico" href="favicon.ico" />
     // Vendor styles
@@ -22,7 +22,7 @@ html
     .splash
       .color-line
       .splash-title
-        h1 Homer - Responsive Admin Theme
+        h1 mSRQ
         p
           | Special Admin Theme for small and medium webapp with very clean and aesthetic style and feel.
         .spinner
@@ -39,37 +39,31 @@ html
         a(href="http://browsehappy.com/") upgrade your browser
         |  to improve your experience.
     .color-line
-    .back-link
-      a.btn.btn-primary(href="/") Back to Dashboard
     .login-container
       .row
         .col-md-12
           .text-center.m-b-md
-            h3 PLEASE LOGIN TO APP
-            small This is the best app ever!
+            h3 POR FAVOR INICIA SESION
           .hpanel
             .panel-body
               form#loginForm(action="/login" method="post" )
                 .form-group
-                  label.control-label(for="username") Username
-                  input#username.form-control(type="text" placeholder="example@gmail.com" title="Please enter you username" required="" value="" name="usuario")
-                  span.help-block.small Your unique username to app
+                  label.control-label(for="username") Usuario
+                  input#username.form-control(type="text" placeholder="Ingresa tu usuario" title="Por favor ingresa tu usuario" required="" value="" name="usuario")
                 .form-group
                   label.control-label(for="password") Password
-                  input#password.form-control(type="password" title="Please enter your password" placeholder="******" required="" value="" name="clave")
-                  span.help-block.small Yur strong password
-                .checkbox
-                  input.i-checks(type="checkbox" checked="")
-                  |                                      Remember login
-                  p.help-block.small (if this is a private computer)
-                button.btn.btn-success.btn-block Login
-                a.btn.btn-default.btn-block(href="#") Register
+                  input#password.form-control(type="password" title="Por favor ingresa tu contraseña" placeholder="******" required="" value="" name="clave")                
+                  //label
+                  //  .checkbox
+                  //    input.i-checks(type="checkbox" checked="") 
+                  //    | Recordar
+                  //    p.help-block.small (solo si es un equipo privado)
+                button.btn.btn-success.btn-block Ingresar
+                a.btn.btn-default.btn-block(href="/registrar") Registrar
       .row
         .col-md-12.text-center
-          strong HOMER
-          |  - AngularJS Responsive WebApp 
-          br
-          |  2015 Copyright Company Name
+          strong mSRQ
+          |  Plasarela de SMS &copy; SRQ 2019
     // Vendor scripts
     script(src="vendor/jquery/dist/jquery.min.js")
     script(src="vendor/jquery-ui/jquery-ui.min.js")

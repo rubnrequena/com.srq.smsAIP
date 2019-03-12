@@ -1,46 +1,58 @@
 extends layout
 
 block content
-  .color-line
-      .back-link
-        a.btn.btn-primary(href="/") Volver al inicio
-      .register-container
-        .row
-          .col-md-12
-            .text-center.m-b-md
-              h3 Registro
-            .hpanel
-              .panel-body
-                form#loginForm(action="/registrar" method="post")
-                  .row
-                    .form-group.col-lg-6
-                      label Usuario
-                      input.form-control(type="text" value="" id="" name="usuario")
-                    .form-group.col-lg-6
-                      label Nombre
-                      input.form-control(type="text" value="" id="" name="nombre")
-                    .form-group.col-lg-6
-                      label Contraseña
-                      input.form-control(type="password" value="" id="" name="clave")
-                    .form-group.col-lg-6
-                      label Repetir Contraseña
-                      input.form-control(type="password" value="" id="" name="clave2")
-                    .form-group.col-lg-6
-                      label Correo
-                      input.form-control(type="mail" value="" id="" name="correo")
-                    .form-group.col-lg-6
-                      label Telefono
-                      input.form-control(type="tel" value="" id="" name="telefono")                  
-                  .text-center
-                    button.btn.btn-success(type="submit") Registrar
-                    button.btn.btn-default(type="reset") Cancelar
-        .row
-          .col-md-12.text-center
-            strong SRQ
-            |  - Responsive WebApp 
-            br
-            |  2019 Copyright
+  .normalheader.transition.animated.fadeIn
+  .hpanel
+    .panel-body
+      a.small-header-action(href='')
+        .clip-header
+          i.fa.fa-arrow-up
+      #hbreadcrumb.pull-right.m-t-lg
+        ol.hbreadcrumb.breadcrumb
+          li
+            a(href='index.html') Registrar usuario
+          li
+            span App views
+          li.active
+            span Perfil 
+      h2.font-light.m-b-xs
+        | Registrar
+      small Show user data in clear profile design
+  .content.animate-panel
+    .row
+      .col-md-12
+        .hpanel
+          .panel-body
+            form#loginForm(action="/registrar" method="post")
+              .row
+                .form-group.col-lg-6
+                  label Usuario
+                  input.form-control(type="text" value="" id="" name="usuario")
+                .form-group.col-lg-6
+                  label Nombre
+                  input.form-control(type="text" value="" id="" name="nombre")
+                .form-group.col-lg-6
+                  label Contraseña
+                  input.form-control(type="password" value="" id="" name="clave")
+                .form-group.col-lg-6
+                  label Repetir Contraseña
+                  input.form-control(type="password" value="" id="" name="clave2")
+                .form-group.col-lg-6
+                  label Correo
+                  input.form-control(type="mail" value="" id="" name="correo")
+                .form-group.col-lg-6
+                  label Telefono
+                  input.form-control(type="tel" value="" id="" name="telefono")                  
+                .form-group.col-lg-12
+                  label Tipo
+                  select.form-control.s2(name="tipo")
+                    option(value="aml") SRQAnimales
+                    option(value="emp") Empresarial
+                    option(value="adm") Administrador
+              .text-center
+                button.btn.btn-success(type="submit") Registrar
+                button.btn.btn-default(type="reset") Cancelar
 block append footer
-        if ok
-          script.
-            alert('Usuario registrado')
+      if ok
+        script.
+          alert('Usuario registrado')
