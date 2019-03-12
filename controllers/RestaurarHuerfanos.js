@@ -1,9 +1,15 @@
 var Sms = require('../models/sms');
-
-module.exports = async ()=> {
-    var min5 = 1000*5;
+var n = 0;
+module.exports.resetAfterXMinutes = 1;
+module.exports.retraso = '0 */1 * * * *';
+module.exports.job = async ()=> {
+    var min5 = 1000*60*this.resetAfterXMinutes;
     var now = new Date().getTime()+min5;
-    let sms = await Sms.find({enviado:-1,capturado:{$lt:now}});
-    console.log(sms);
-    console.log("total ",sms.length);
+    let sms = await Sms.find({minado:{$exists:true},"minado.cap":{$lt:now}});
+    if (sms.length>0) {
+        await Sms.updateMany({minado:{$exists:true},"minado.cap":{$lt:now}},{
+            $unset:{minado:true}
+        });
+    }
+    console.log("total ",(new Date).toLocaleTimeString(),sms.length);
 }
