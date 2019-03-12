@@ -1,0 +1,90 @@
+extends layoutMenu
+
+block append header
+  link(rel="stylesheet", href="/vendor/datatables.net-bs/css/dataTables.bootstrap.min.css")
+
+block content
+  .normalheader.transition.animated.fadeIn
+    .hpanel
+      .panel-body
+        a.small-header-action(href="")
+          .clip-header
+            i.fa.fa-arrow-up
+        #hbreadcrumb.pull-right.m-t-lg
+          ol.hbreadcrumb.breadcrumb
+            li
+              a(href="/") Inicio
+            li.active
+              span Contactos
+        h2.font-light.m-b-xs
+          | Contactos
+        small Administrar contactos
+  .content.animate-panel
+    .hpanel.collapsed
+      .panel-heading.hbuilt
+        .panel-tools
+          a.showhide
+            i.fa.fa-chevron-up
+          a.closebox
+            i.fa.fa-times
+        | Nuevo Contacto
+      .panel-body
+        form#nuevoContacto.form(method="post",action="/contactos")
+          .form-group
+            label Nombre
+            input.form-control(type="text", name="nombre")
+          .form-group
+            label Teléfono
+            input.form-control(type="text", name="numero")
+          .form-group
+            label Etiquetas
+            input.form-control(type="text", name="etiquetas")  
+      .panel-footer 
+        .pull-right
+          button.btn.btn-success(type="submit",form="nuevoContacto") Enviar
+          button.btn.btn-default.btn-sm(type="reset",form="nuevoContacto") Reiniciar
+    .hpanel
+      .panel-heading.hbuilt
+        .panel-tools
+          a.showhide
+            i.fa.fa-chevron-up
+          a.closebox
+            i.fa.fa-times
+        | Nuevo Contacto
+      .panel-body
+        .table-responsive
+          table#contactosTabla.table
+            thead
+              tr
+                th Nombre
+                th Numero
+                th.hidden Etiquetas
+            tbody
+              each contacto in contactos
+                tr
+                  td= contacto.nombre
+                  td= contacto.numero
+                  td.hidden= contacto.etiquetas    
+append footer
+  script(src='/vendor/datatables/media/js/jquery.dataTables.min.js')
+  script(src='/vendor/datatables.net-bs/js/dataTables.bootstrap.min.js')
+  // DataTables buttons scripts 
+  script(src='/vendor/pdfmake/build/pdfmake.min.js')
+  script(src='/vendor/pdfmake/build/vfs_fonts.js')
+  script(src='/vendor/datatables.net-buttons/js/buttons.html5.min.js')
+  script(src='/vendor/datatables.net-buttons/js/buttons.print.min.js')
+  script(src='/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')
+  script(src='/vendor/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')
+  script.
+    $('#contactosTabla').dataTable( {
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+            buttons: [
+                {extend: 'copy',className: 'btn-sm'},
+                {extend: 'csv',title: 'Contactos', className: 'btn-sm'},
+                {extend: 'pdf', title: 'Contactos', className: 'btn-sm'},
+                {extend: 'print',className: 'btn-sm'}
+            ]
+        });
+
+  

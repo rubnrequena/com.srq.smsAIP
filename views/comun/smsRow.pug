@@ -1,5 +1,5 @@
 for sms in mensajes
   tr
     td= sms.numero
+    td= moment(sms.recibido).format("DD/MM/YY hh:mm a")    
     td= sms.texto
-    td= sms.recibido

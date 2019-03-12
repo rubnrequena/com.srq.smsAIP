@@ -4,8 +4,9 @@ const passport = require('passport');
 const auth = require('../config/passport');
 const moment = require('moment');
 
+const Contacto = require("../models/contacto");
 const Sms = require('../models/sms');
-/* GET home page. */
+
 router.get('/', auth.estaAutenticado, function(req, res, next) {
   if (req.user.tipo=="su") res.render('index', { usuario:req.user, title: 'mSRQ' });
   else {
@@ -31,6 +32,34 @@ router.get("/perfil",auth.estaAutenticado,async (req,res,next) => {
   res.render("perfil",{usuario:req.user,mensajes:sms,smsMes:enviadosMes,smsSem:enviadosSemana});
 })
 
+router.get("/contactos",auth.estaAutenticado, (req,res,next) => {
+  Contacto.find({agenda:req.user._id},(err,contactos) => {
+    if (err) next(err);
+    else {
+      res.render("contactos",{contactos:contactos,usuario:req.user});
+    }
+  })
+})
+
+router.post("/contactos",auth.estaAutenticado, (req,res,next) => {
+  let contacto = new Contacto({
+    agenda:req.user._id,
+    nombre:req.body.nombre,
+    numero:req.body.numero,
+    etiquetas:req.body.etiquetas
+  });
+  contacto.save((err) => {
+    if (err) next(err);
+    else {
+      Contacto.find({agenda:req.user._id},(err,contactos) => {
+        if (err) next(err);
+        else {
+          res.render("contactos",{contactos:contactos,usuario:req.user});
+        }
+      })
+    }
+  })
+})
 
 router.get('/login',(req,res,next) => {
   res.render('login');

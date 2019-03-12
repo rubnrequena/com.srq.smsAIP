@@ -1,5 +1,7 @@
 extends ../layoutMenu
 
+block append header
+  link(rel="stylesheet", href="/vendor/fooTable/css/footable.core.min.css")
 block content
   //content
   .content.animate-panel
@@ -100,17 +102,21 @@ block content
             |                         Ultimos Mensajes
           .panel-body.list
             .table-responsive.project-list
-              table.table.table-striped
+              table#foosms.footable.table.table-striped.toggle-arrow-tiny
                 thead
                   tr
-                    th Destino
-                    th Cuerpo
+                    th(data-toggle="true") Destino
                     th Fecha
+                    th(data-hide="all") Mensaje
                 tbody#sms-actividad
             script.
-              fetch("/api/sms/last?limit=5&render=html")
+              fetch("/api/sms/last?limit=10&render=html")
                 .then(res => res.text())
-                .then(body => $('#sms-actividad').html(body));
+                .then((body) => {
+                  $('#sms-actividad').html(body);
+                  console.log(body);
+                  $('#foosms').footable();
+                });
       .col-lg-3
         .hpanel
           .panel-heading
@@ -234,3 +240,6 @@ block content
       small
         | Lorem Ipsum is simply dummy text of the printing simply all dummy text.
         | Many desktop publishing packages and web page editors.
+block append footer
+  script(src="/vendor/fooTable/dist/footable.all.min.js")
+  

@@ -19,6 +19,14 @@ router.post('/',auth.estaAutenticado, async (req, res, next) => {
         } else next({state:1001,message:"Mensaje no enviado"})
     } else next({state:1001,message:"Mensaje no enviado, saldo insuficiente"})
 })
+
+router.get("/enviados",auth.estaAutenticado,(req,res,next) => {
+    Sms.find({},(err,mensajes) => {
+        if (err) next(err);
+        else res.render("sms/enviados",{usuario:req.user,mensajes:mensajes});
+    })
+})
+
 router.get('/all',(req,res,next)=>{
     let lm = parseInt(req.query.limit) || 20;
     Sms.find({},(err,mensajes)=>{

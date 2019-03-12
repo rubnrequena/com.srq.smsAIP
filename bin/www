@@ -31,7 +31,7 @@ server.on('listening', onListening);
 let mongorc = require("../config/mongo");
 mongoose.connect(mongorc.uri,{useNewUrlParser: true},(err)=> {
   if (err) console.log("Error al conectar con Mongo");
-  else console.log('conectado a mongoDB');
+  else console.log('mongoDB en',mongorc.uri);
   server.listen(port);
 });
 

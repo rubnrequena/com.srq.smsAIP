@@ -35,7 +35,7 @@ block content
               for sol in solicitudes
                 tr
                   td
-                    a.confirmar-solicitud(href="#"+sol._id,solID=sol._id)
+                    a.confirmar-solicitud(href="#",solID=sol._id)
                       i.fa.fa-check.text-success(aria-hidden='true') &nbsp;
                   td= moment(sol.registro).format("DD/MM/YY")
                   td= sol.destino.nombre

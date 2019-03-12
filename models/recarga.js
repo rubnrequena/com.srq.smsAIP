@@ -14,7 +14,6 @@ let recargaSq = new mongo.Schema({
     type:Number,
     min:100
   },
-  pendiente:Boolean,
   pkg:{type:mongo.Schema.Types.ObjectId, ref:"Paquete"}
 })
 

@@ -2,7 +2,7 @@ aside#menu
   #navigation
     .profile-picture
       a(href='/')
-        img.img-circle.m-b(src='images/profile.jpg' alt='logo')
+        img.img-circle.m-b(src='/images/profile.jpg' alt='logo')
       .stats-label.text-color
         span.font-extra-bold.font-uppercase= usuario.nombre
         .dropdown
@@ -24,15 +24,24 @@ aside#menu
           span.nav-label Panel de Control
           //span.label.label-success.pull-right v.1
       li
-        a(href='/sms')
-          span.nav-label Enviar SMS
-          span.label.label-warning.pull-right NEW
+        a(href='#')
+          span.nav-label Mensajes
+          span.fa.arrow
+        ul.nav.nav-second-level
+          li
+            a(href='/sms') 
+              i.fa.fa-send(aria-hidden='true') &nbsp; 
+              | Enviar
+          li
+            a(href='/sms/enviados') Enviados
       if usuario.tipo=="su"
         li
           a(href='#')
             span.nav-label Usuarios
             span.fa.arrow
           ul.nav.nav-second-level
+            li
+              a(href='/adm/usuarios') Administrar
             li
               a(href='/adm/registrar') Registrar
             li

@@ -1,0 +1,58 @@
+extends ../layoutMenu
+
+block append header
+  link(rel="stylesheet", href="/vendor/fooTable/css/footable.core.min.css")
+
+block content
+  .normalheader.transition.animated.fadeIn
+    .hpanel
+      .panel-body
+        a.small-header-action(href="")
+          .clip-header
+            i.fa.fa-arrow-up
+        #hbreadcrumb.pull-right.m-t-lg
+          ol.hbreadcrumb.breadcrumb
+            li
+              a(href="/") Inicio
+            li.active
+              span Enviados
+        h2.font-light.m-b-xs
+          | Mensajes Enviados
+  .content.animate-panel
+    .panel
+      .panel-body
+        input.form-control.input-sm.m-b-md#filter(type='text', placeholder='Buscar')
+        .table-responsive.project-list
+          table#foosms.footable.table.table-striped.toggle-arrow-tiny(data-page-size="20" data-filter="#filter")
+            thead
+              tr
+                th
+                th(data-toggle="true") 
+                  | Destino
+                th Fecha
+                th(data-hide="all") Mensaje
+            tbody#sms-actividad
+              for sms in mensajes
+                tr
+                  td 
+                    if sms.enviado
+                      i.fa.fa-send.text-success(aria-hidden='true') &nbsp;
+                    else
+                      if sms.minado
+                        i.fa.fa-clock-o(aria-hidden='true') &nbsp;
+                      else
+                        i.fa.fa-send(aria-hidden='true') &nbsp;  
+                  td= sms.numero
+                  td= moment(sms.recibido).format("DD/MM/YY hh:mm a")    
+                  td= sms.texto
+            <tfoot>
+              <tr>
+                  <td colspan="5">
+                      <ul class="pagination pull-right"></ul>
+                  </td>
+              </tr>
+              </tfoot>
+block append footer
+  script(src="/vendor/fooTable/dist/footable.all.min.js")        
+  script.
+    $('#foosms').footable();

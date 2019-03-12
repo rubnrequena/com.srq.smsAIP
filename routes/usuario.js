@@ -41,7 +41,7 @@ router.get('/recarga/historia',auth.estaAutenticado,(req,res,next) => {
     else {
       res.render('clientes/recargaHistoria',{usuario:req.user,recargas:_recargas});
     }
-  }).populate("pkg").sort({pendiente:1,registro:-1});
+  }).populate("pkg").sort({procesado:1,registro:-1});
 });
 
 module.exports = router;

@@ -1,0 +1,166 @@
+extends ../layoutMenu
+
+block append header
+  link(rel="stylesheet", href="/vendor/datatables.net-bs/css/dataTables.bootstrap.min.css")
+
+block content
+  .normalheader.transition.animated.fadeIn
+    .hpanel
+      .panel-body
+        a.small-header-action(href="")
+          .clip-header
+            i.fa.fa-arrow-up
+        #hbreadcrumb.pull-right.m-t-lg
+          ol.hbreadcrumb.breadcrumb
+            li
+              a(href="/") Inicio
+            li.active
+              span Usuarios
+        h2.font-light.m-b-xs
+          | Usuarios
+        small Administrar usuarios
+  .content.animate-panel
+    .hpanel.collapsed
+      .panel-heading.hbuilt
+        .panel-tools
+          a.showhide
+            i.fa.fa-chevron-up
+          a.closebox
+            i.fa.fa-times
+        | Nuevo Usuario
+      .panel-body
+        form#nuevoContacto.form(method="post",action="/contactos")
+          .form-group
+            label Nombre
+            input.form-control(type="text", name="nombre")
+          .form-group
+            label Teléfono
+            input.form-control(type="text", name="numero")
+          .form-group
+            label Etiquetas
+            input.form-control(type="text", name="etiquetas")  
+      .panel-footer 
+        .pull-right
+          button.btn.btn-success(type="submit",form="nuevoContacto") Enviar
+          button.btn.btn-default.btn-sm(type="reset",form="nuevoContacto") Reiniciar          
+    
+    .row
+      .col-lg-3
+        .hpanel.stats
+          .panel-body.h-200
+            .stats-title.pull-left
+              h4 Usuarios
+            .stats-icon.pull-right
+              i.pe-7s-user.fa-4x
+            .clearfix
+            .m-t-xs
+              .row
+                .col-xs-6
+                  small.stat-label Total
+                  h4= stats.total
+                .col-xs-6
+                  small.stat-label Ult. 30 dias
+                  h4= stats.ult30
+              .row
+                .col-xs-6
+                  small.stat-label Activos
+                  h4= stats.activos
+                .col-xs-6
+                  small.stat-label Inactivos
+                  h4= stats.total-stats.activos
+      .col-lg-3
+        .hpanel.stats
+          .panel-body.h-200.list
+            .stats-title.pull-left
+              h4 Categorias
+            .stats-icon.pull-right
+              i.pe-7s-display1.fa-4x
+            br
+            .m-t-xl
+              small Animales
+            .progress.m-t-xs.full
+              .progress-bar.progress-bar-success(style='width: '+stats.prc.aml+'%', aria-valuemax='100', aria-valuemin='0', aria-valuenow=stats.prc.aml, role='progressbar')= stats.prc.aml +"%"                
+            small Empresarial
+            .progress.m-t-xs.full
+              .progress-bar.progress-bar-success(style='width: '+stats.prc.emp+'%', aria-valuemax='100', aria-valuemin='0', aria-valuenow=stats.prc.emp, role='progressbar')= stats.prc.emp +"%"
+            small Otros                
+            .progress.m-t-xs.full
+              .progress-bar.progress-bar-success(style='width: '+stats.prc.otro+'%', aria-valuemax='100', aria-valuemin='0', aria-valuenow=stats.prc.otro, role='progressbar')= stats.prc.otro +"%"
+      .col-lg-3
+        .hpanel.stats
+          .panel-body.h-200.list
+            .stats-title.pull-left
+              h4 Mensajes - 
+                span= stats.sms.total+" sms"
+            .stats-icon.pull-right
+              i.pe-7s-mail.fa-4x
+            br
+            .m-t-xl
+              small Animales - 
+              small.pull-right= stats.sms.aml +" sms"
+            .progress.m-t-xs.full
+              .progress-bar.progress-bar-success(style='width: '+stats.sms.paml+'%', aria-valuemax='100', aria-valuemin='0', aria-valuenow=stats.sms.paml, role='progressbar')= stats.sms.paml +"%"                
+            small Empresarial - 
+            small.pull-right= stats.sms.emp +" sms"
+            .progress.m-t-xs.full
+              .progress-bar.progress-bar-success(style='width: '+stats.sms.pemp+'%', aria-valuemax='100', aria-valuemin='0', aria-valuenow=stats.sms.pemp, role='progressbar')= stats.sms.pemp +"%"
+            small Otros - 
+            small.pull-right= stats.sms.otro +" sms"   
+            .progress.m-t-xs.full
+              .progress-bar.progress-bar-success(style='width: '+stats.sms.potro+'%', aria-valuemax='100', aria-valuemin='0', aria-valuenow=stats.sms.potro, role='progressbar')= stats.sms.potro +"%"
+        
+    .hpanel
+      .panel-heading.hbuilt
+        .panel-tools
+          a.showhide
+            i.fa.fa-chevron-up
+          a.closebox
+            i.fa.fa-times
+        | Nuevo Usuario
+      .panel-body
+        .table-responsive
+          table#contactosTabla.table
+            thead
+              tr
+                th Nombre
+                th Usuario
+                th Tipo
+                th Mensajes
+            tbody
+              each usuario in usuarios
+                tr
+                  td= usuario.nombre
+                  td= usuario.usuario
+                  if (usuario.tipo=="aml")
+                    td 
+                      i.fa.fa-paw(aria-hidden='true',title="SRQ Animal") &nbsp;
+                  else if (usuario.tipo=="emp")
+                    td 
+                      i.fa.fa-industry(aria-hidden='true',title="Empresarial") &nbsp;
+                  else
+                    td 
+                      i.fa.fa-user-secret(aria-hidden='true',title="Otro") &nbsp;
+                  td= usuario.smsDisponibles
+append footer
+  script(src='/vendor/datatables/media/js/jquery.dataTables.min.js')
+  script(src='/vendor/datatables.net-bs/js/dataTables.bootstrap.min.js')
+  // DataTables buttons scripts 
+  script(src='/vendor/pdfmake/build/pdfmake.min.js')
+  script(src='/vendor/pdfmake/build/vfs_fonts.js')
+  script(src='/vendor/datatables.net-buttons/js/buttons.html5.min.js')
+  script(src='/vendor/datatables.net-buttons/js/buttons.print.min.js')
+  script(src='/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')
+  script(src='/vendor/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')
+  script.
+    $('#contactosTabla').dataTable( {
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+            buttons: [
+                {extend: 'copy',className: 'btn-sm'},
+                {extend: 'csv',title: 'Contactos', className: 'btn-sm'},
+                {extend: 'pdf', title: 'Contactos', className: 'btn-sm'},
+                {extend: 'print',className: 'btn-sm'}
+            ]
+        });
+
+  

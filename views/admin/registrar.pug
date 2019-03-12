@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block content
   .normalheader.transition.animated.fadeIn
@@ -25,7 +25,7 @@ block content
           .panel-body
             if ok
               .alert.alert-success.alert5s Usuario registrado exitosamente
-            form#loginForm(action="/registrar" method="post")
+            form#loginForm(action="/adm/registrar" method="post")
               .row
                 .form-group.col-lg-6
                   label Usuario
