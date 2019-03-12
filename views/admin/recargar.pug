@@ -21,8 +21,8 @@ block content
       .panel-body
         if msgOK
           .alert.alert-success.alert5s Recarga realizada exitosamente 
-            a(href="/adm/recarga/"+recargaID) Ver Detalle
-        form#recargarForm.ajax(action="/adm/recargar" method="post")
+            a(href="/adm/recarga/nueva"+recargaID) Ver Detalle
+        form#recargarForm.ajax(action="/adm/recarga/nueva" method="post")
           .row
             .form-group.col-lg-12
               label Usuario
@@ -69,7 +69,6 @@ block append footer
         e.preventDefault(e);
         swal({
             title: "Confirma desea recargar saldo?",
-            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
             showCancelButton: true,
             confirmButtonText: "Confirmar",
             cancelButtonText: "Cancelar",

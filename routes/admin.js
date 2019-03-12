@@ -33,7 +33,7 @@ router.post('/registrar',(req,res,next) => {
   })
 })
 
-router.get("/recargar",auth.esSuperAdmin,async (req,res,next) => {
+router.get("/recarga/nueva",auth.esSuperAdmin,async (req,res,next) => {
   let users = await Usuario.find();
   let _recargas = await Recarga.find().populate("destino","nombre");
   res.render('admin/recargar',{usuario:req.user,usuarios:users,
@@ -100,8 +100,6 @@ router.get("/recarga/confirmar/:solicitud",auth.esSuperAdmin, (req,res,next) => 
     }
   });
 });
-
-
 router.get("/recarga/:id",auth.esSuperAdmin,async (req,res,next) => {
   var r = await Recarga.findById(req.params.id).populate("destino","nombre").populate("pkg","nombre codigo");
   res.json(r);
