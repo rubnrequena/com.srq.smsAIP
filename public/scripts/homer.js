@@ -11,6 +11,9 @@ $(document).ready(function () {
 
     //custom
     $('.s2').select2();
+    setTimeout(() => {
+        $('.alert5s').remove();
+    }, 5000);
 
     /*$('form.ajax').submit((e) => {
         e.preventDefault(e);        

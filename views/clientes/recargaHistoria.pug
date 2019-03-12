@@ -1,0 +1,42 @@
+extends ../layoutMenu
+  
+block content
+  .normalheader.transition.animated.fadeIn
+    .hpanel
+      .panel-body
+        a.small-header-action(href="")
+          .clip-header
+            i.fa.fa-arrow-up
+        #hbreadcrumb.pull-right.m-t-lg
+          ol.hbreadcrumb.breadcrumb
+            li
+              a(href="/") Panel de Control
+            li.active
+              span Recargar
+        h2.font-light.m-b-xs
+          | Centro de Recargas
+        small Solicitar recargas en linea
+  .content.animate-panel
+    .panel
+      .panel-body
+        table.table
+          thead
+            tr
+              th
+              th Fecha
+              th Recibo
+              th Monto
+              th Paquete
+          tbody#recargas
+            for recarga in recargas
+              tr
+                if recarga.procesado
+                  td 
+                    i.fa.fa-clock-o.text-danger(aria-hidden='true') &nbsp;
+                else
+                  td 
+                    i.fa.fa-check.text-success(aria-hidden='true') &nbsp;
+                td= recarga.fecha
+                td= recarga.recibo
+                td= recarga.monto
+                td= recarga.pkg.nombre    

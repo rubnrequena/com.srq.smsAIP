@@ -15,38 +15,51 @@ block content
               span Recargar
         h2.font-light.m-b-xs
           | Centro de Recargas
-        small Solicitar recargas en linea
+        small Recargar saldo a los usuarios    
   .content.animate-panel
     .panel
       .panel-body
-        form#recargarForm.ajax(action="/recarga/solicitud" method="post")
-          .row            
-            .form-group.col-lg-6
+        if msgOK
+          .alert.alert-success.alert5s Recarga realizada exitosamente 
+            a(href="/adm/recarga/"+recargaID) Ver Detalle
+        form#recargarForm.ajax(action="/adm/recargar" method="post")
+          .row
+            .form-group.col-lg-12
+              label Usuario
+              select#usuarios.s2.form-control(name="usuario")
+                each usuario in usuarios
+                  option(value= usuario._id)= usuario.nombre
+            .form-group.col-lg-4
               label Recibo
               input.form-control(type="text" value="" id="" name="recibo")
-            .form-group.col-lg-6
+            .form-group.col-lg-4
               label Monto
               input.form-control(type="text" value="" id="" name="monto")
-            .form-group.col-lg-6
-              label Fecha
-              input.form-control(type="text" value="" id="" name="fecha")
-            .form-group.col-lg-6
+            .form-group.col-lg-4
               label Banco
-              select#paquetes.s2.form-control(name="paquete")
+              select#paquetes.s2.form-control(name="banco")
                 option(value="banesco") Banesco
                 option(value="mercantil") Mercantil
                 option(value="venezuela") Venezuela
             .form-group.col-lg-12
               label Paquete
-              select#paquetes.s2.form-control(name="paquete")
-                option(value="pkg02") Paquete Mini
-                option(value="pkg01") Paquete Inicial
+              include ../comun/recargarSelect
           .text-center
-            button.btn.btn-success(type="submit") Solicitar
+            button.btn.btn-success(type="submit") Registrar
             button.btn.btn-default(type="reset") Cancelar
   .panel
     .panel-body
-      
+      table.table
+        thead
+          tr
+            th Usuario
+            th Recibo
+            th Monto
+        each rc in recargas
+          tr
+            td= rc.destino.nombre
+            td= rc.recibo
+            td= rc.monto
 block append footer
   script.
     var rch = $('#recargarForm');

@@ -8,10 +8,6 @@ var logger = require('morgan');
 const passport = require('passport');
 const auth = require('./config/passport');
 
-var indexRouter = require('./routes/index');
-var usuariosRouter = require('./routes/usuario');
-var smsRouter = require('./routes/sms');
-var apiRouter = require('./routes/api');
 
 var CronJob = require('cron/lib/cron.js').CronJob;
 const resHuerfanos = require('./controllers/RestaurarHuerfanos');
@@ -19,6 +15,8 @@ const job = new CronJob(resHuerfanos.retraso, resHuerfanos.job);
 job.start();
 
 var app = express(); 
+
+app.locals.moment = require("moment");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,10 +43,18 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); 
 
+//routes
+var indexRouter = require('./routes/index');
+var usuariosRouter = require('./routes/usuario');
+var smsRouter = require('./routes/sms');
+var apiRouter = require('./routes/api');
+var admRouter = require('./routes/admin');
+
 app.use('/', indexRouter);
 app.use('/usuario', usuariosRouter);
 app.use('/sms',smsRouter);
 app.use('/api',apiRouter);
+app.use('/adm',admRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,5 +1,7 @@
-extends layoutMenu
-  
+extends ../layoutMenu
+
+block append header
+  link(rel="stylesheet", href="/vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.min.css")  
 block content
   .normalheader.transition.animated.fadeIn
     .hpanel
@@ -15,55 +17,43 @@ block content
               span Recargar
         h2.font-light.m-b-xs
           | Centro de Recargas
-        small Recargar saldo a los usuarios    
+        small Solicitar recargas en linea
   .content.animate-panel
     .panel
       .panel-body
-        if msgOK
-          .alert.alert-success Recarga realizada exitosamente 
-            a(href="/recarga/"+recargaID) Ver Detalle
-        form#recargarForm.ajax(action="/recargar" method="post")
-          .row
-            .form-group.col-lg-12
-              label Usuario
-              select#usuarios.s2.form-control(name="usuario")
-                each usuario in usuarios
-                  option(value= usuario._id)= usuario.nombre
-            .form-group.col-lg-4
+        if ok
+          .alert.alert-success Recarga solicitada exitosamente
+            a(href="/recarga/"+ok) Ver Detalle
+        form#recargarForm.ajax(action="/usuario/recarga/solicitud" method="post")
+          .row            
+            .form-group.col-lg-6
               label Recibo
               input.form-control(type="text" value="" id="" name="recibo")
-            .form-group.col-lg-4
+            .form-group.col-lg-6
               label Monto
               input.form-control(type="text" value="" id="" name="monto")
-            .form-group.col-lg-4
+            .form-group.col-lg-6
+              label Fecha
+              input.form-control.date(type="text" value="" id="" name="fecha",onFocus="blur();")
+            .form-group.col-lg-6
               label Banco
-              select#paquetes.s2.form-control(name="paquete")
+              select#paquetes.s2.form-control(name="banco")
                 option(value="banesco") Banesco
                 option(value="mercantil") Mercantil
                 option(value="venezuela") Venezuela
             .form-group.col-lg-12
               label Paquete
-              select#paquetes.s2.form-control(name="paquete")
-                for paquete in paquetes
-                  option(value= paquete.codigo)= paquete.nombre
+              include ../comun/recargarSelect
           .text-center
-            button.btn.btn-success(type="submit") Registrar
+            button.btn.btn-success(type="submit") Solicitar
             button.btn.btn-default(type="reset") Cancelar
   .panel
     .panel-body
-      table.table
-        thead
-          tr
-            th Usuario
-            th Recibo
-            th Monto
-        each rc in recargas
-          tr
-            td= rc.destino.nombre
-            td= rc.recibo
-            td= rc.monto
+      
 block append footer
+  script(src="/vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js")
   script.
+    $('.date').datepicker();
     var rch = $('#recargarForm');
     var go=false;
     rch.submit(function (e) {
@@ -71,7 +61,6 @@ block append footer
         e.preventDefault(e);
         swal({
             title: "Confirma desea recargar saldo?",
-            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
             showCancelButton: true,
             confirmButtonText: "Confirmar",
             cancelButtonText: "Cancelar",

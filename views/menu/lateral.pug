@@ -34,10 +34,25 @@ aside#menu
             span.fa.arrow
           ul.nav.nav-second-level
             li
-              a(href='/registrar') Registrar
+              a(href='/adm/registrar') Registrar
             li
-              a(href='/recargar') Recargar 
+              a(href='/adm/recargar') Recargar
+        li
+          a(href='#')
+            span.nav-label Recargas
+            span.fa.arrow
+          ul.nav.nav-second-level
+            li
+              a(href='/adm/recarga/nueva') Recargar
+            li
+              a(href='/adm/recarga/solicitudes') Solicitudes
       else
         li
-          a(href='/recarga/solicitud')
-            span.nav-label Recargar
+          a(href='#')
+            span.nav-label Recargas
+            span.fa.arrow
+          ul.nav.nav-second-level
+            li
+              a(href='/usuario/recarga/solicitud') Solicitar
+            li
+              a(href='/usuario/recarga/historia') Historia

@@ -1,7 +1,11 @@
 var express = require('express');
 var router = express.Router();
+
 var smsControl = require('../controllers/SmsControl');
 var Usuario = require('../models/usuario');
+var Sms = require("../models/sms");
+
+const auth = require('../config/passport');
 
 router.get('/enviar/:key',async (req,res,next)=>{
     let u = await Usuario.findById(req.params.key);
@@ -46,6 +50,18 @@ router.get("/usuario/:id",(req,res,next) => {
     })
 })
 
+router.get("/sms/last",auth.estaAutenticado,(req,res,next) => {
+    let limit = parseInt(req.query.limit) || 10;
+    let render = req.query.render || "json";
+    Sms.find({usuario:req.user._id},(err,mensajes) => {
+        if (err) next(err);
+        else {
+            if (render=="json") res.json(mensajes);
+            if (render=="html") res.render('comun/smsRow',{mensajes:mensajes});
+        }
+    }).sort({recibido:-1}).limit(limit);
+})
+
 router.get('/sms/:id',(req,res,next) => {
     smsControl.sms(req.params.id,(err,sms) => {
         if (err) next(err);
@@ -53,4 +69,5 @@ router.get('/sms/:id',(req,res,next) => {
         //else res.json(sms);
     },next);
 })
+
 module.exports = router;

@@ -23,6 +23,8 @@ block content
       .col-md-12
         .hpanel
           .panel-body
+            if ok
+              .alert.alert-success.alert5s Usuario registrado exitosamente
             form#loginForm(action="/registrar" method="post")
               .row
                 .form-group.col-lg-6
@@ -52,7 +54,3 @@ block content
               .text-center
                 button.btn.btn-success(type="submit") Registrar
                 button.btn.btn-default(type="reset") Cancelar
-block append footer
-      if ok
-        script.
-          alert('Usuario registrado')
