@@ -35,7 +35,7 @@ app.use(session({
   resave: false, 
   saveUninitialized: false,
   store: new mongoStore({
-    url:mongorc.uriLocal,
+    url:mongorc.uri,
     autoReconnect:true
   })
  }));
