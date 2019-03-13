@@ -50,6 +50,9 @@ block content
             if pinOK==true
               .alert.alert-success.alert5s
                 span Su PIN se ha actualizado exitosamente
+            if claveOK==true
+              .alert.alert-success.alert5s
+                span Su contraseña se ha actualizado exitosamente
             ul.nav.nav-tabs
               li
                 a(data-toggle='tab' href='#tab-1') Editar
@@ -76,11 +79,11 @@ block content
                       .col-sm-6.col-sm-offset-3
                         button.btn.btn-primary.btn-block.pull-right(type='submit') Actualizar
                   | Cambiar Contraseña
-                  form.form-horizontal(method="post",action="/perfil/cambiarpsw")
+                  form.form-horizontal(method="post",action="/perfil/cambiarclave")
                     .form-group
                       label.col-sm-2.control-label Nueva
                       .col-sm-9
-                        input.form-control(type="text",required="true")
+                        input.form-control(type="text",required="true",name="clave")
                     .form-group
                       label.col-sm-2.control-label Repetir
                       .col-sm-9

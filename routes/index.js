@@ -31,7 +31,15 @@ router.get("/perfil",auth.estaAutenticado,async (req,res,next) => {
   }
   let opt = {usuario:req.user,mensajes:sms,smsMes:enviadosMes,smsSem:enviadosSemana};
   if (req.query.pin=="ok") opt.pinOK=true;
+  if (req.query.clave=="ok") opt.claveOK=true;
   res.render("perfil",opt);
+});
+router.post("/perfil/cambiarclave",auth.estaAutenticado,(req,res,next) => {
+  req.user.clave = req.body.clave;
+  req.user.save((err) => {
+    if (err) next(err);
+    res.redirect('/perfil?clave=ok');
+  })
 });
 router.post("/perfil/cambiarpin",auth.estaAutenticado,(req,res,next) => {
   req.user.pin = req.body.pin;
