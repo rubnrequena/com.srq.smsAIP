@@ -29,7 +29,16 @@ router.get("/perfil",auth.estaAutenticado,async (req,res,next) => {
     if (c.isBetween(ma,mb)) enviadosMes++;
     if (c.isBetween(wa,wb)) enviadosSemana++;
   }
-  res.render("perfil",{usuario:req.user,mensajes:sms,smsMes:enviadosMes,smsSem:enviadosSemana});
+  let opt = {usuario:req.user,mensajes:sms,smsMes:enviadosMes,smsSem:enviadosSemana};
+  if (req.query.pin=="ok") opt.pinOK=true;
+  res.render("perfil",opt);
+});
+router.post("/perfil/cambiarpin",auth.estaAutenticado,(req,res,next) => {
+  req.user.pin = req.body.pin;
+  req.user.save((err) => {
+    if (err) next(err);
+    res.redirect("/perfil?pin=ok");
+  });
 })
 
 router.get("/contactos",auth.estaAutenticado, (req,res,next) => {

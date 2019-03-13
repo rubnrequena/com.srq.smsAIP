@@ -7,6 +7,11 @@ var usuarioSq = new mongo.Schema({
   clave:String,
   creado:Date,
   activo:Boolean,
+  pin:{
+    type:Number,
+    max:9999,
+    min:1000
+  },
   tipo:{
     type:String,
     enum:["su","adm","aml","emp"]

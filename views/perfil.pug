@@ -47,6 +47,9 @@ block content
       .col-lg-8(style='')
         .hpanel
           .hpanel
+            if pinOK==true
+              .alert.alert-success.alert5s
+                span Su PIN se ha actualizado exitosamente
             ul.nav.nav-tabs
               li
                 a(data-toggle='tab' href='#tab-1') Editar
@@ -72,7 +75,7 @@ block content
                     .form-group
                       .col-sm-6.col-sm-offset-3
                         button.btn.btn-primary.btn-block.pull-right(type='submit') Actualizar
-                    | Cambiar Contraseña
+                  | Cambiar Contraseña
                   form.form-horizontal(method="post",action="/perfil/cambiarpsw")
                     .form-group
                       label.col-sm-2.control-label Nueva
@@ -82,6 +85,19 @@ block content
                       label.col-sm-2.control-label Repetir
                       .col-sm-9
                         input.form-control(type="text",required="true")  
+                    .form-group
+                      .col-sm-6.col-sm-offset-3
+                        button.btn.btn-primary.btn-block.pull-right(type='submit') Confirmar    
+                  | Cambiar PIN
+                  form.form-horizontal(method="post",action="/perfil/cambiarpin")
+                    .form-group
+                      label.col-sm-2.control-label Nuevo
+                      .col-sm-9
+                        input.form-control(type="number",required="true",name="pin")
+                    .form-group
+                      label.col-sm-2.control-label Repetir
+                      .col-sm-9
+                        input.form-control(type="number",required="true")  
                     .form-group
                       .col-sm-6.col-sm-offset-3
                         button.btn.btn-primary.btn-block.pull-right(type='submit') Confirmar    
