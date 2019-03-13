@@ -4,9 +4,8 @@ const session = require('express-session');
 const mongoStore = require('connect-mongo')(session);
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
 const passport = require('passport');
-const auth = require('./config/passport');
+const compression = require('compression');
 
 var CronJob = require('cron/lib/cron.js').CronJob;
 const resHuerfanos = require('./controllers/RestaurarHuerfanos');
@@ -21,7 +20,7 @@ app.locals.moment = require("moment");
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-//app.use(logger('dev'));
+app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
