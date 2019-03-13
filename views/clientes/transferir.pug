@@ -1,0 +1,40 @@
+extends ../layoutMenu
+  
+block content
+  .normalheader.transition.animated.fadeIn
+    .hpanel
+      .panel-body
+        case msg
+          when "envioOK"
+            | Transferencia realizada satisfactoriamente #
+            a(href="/transferencia/"+recibo, title="Ver Transferencia")= recibo        
+        a.small-header-action(href="")
+          .clip-header
+            i.fa.fa-arrow-up
+        #hbreadcrumb.pull-right.m-t-lg
+          ol.hbreadcrumb.breadcrumb
+            li
+              a(href="/") Inicio
+            li.active
+              span Transferir
+        h2.font-light.m-b-xs
+          | Transferir
+  .content.animate-panel
+    .panel
+      .panel-body
+        form.form-horizontal(method="post",action="/usuario/transferir")
+          .form-group
+            label.control-label.col-sm-2  Destinatario
+            .col-sm-9
+              input.form-control(type="text",name="destino")
+          .form-group
+            label.control-label.col-sm-2  PIN
+            .col-sm-9
+              input.form-control(type="number",name="pin")
+          .form-group
+            label.control-label.col-sm-2  Cantidad
+            .col-sm-9
+              input.form-control(type="number",name="cantidad")
+          .form-group
+            .col-sm-6.col-sm-offset-3
+              button.btn.btn-primary.btn-block(type='submit') Transferir

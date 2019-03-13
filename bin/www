@@ -33,7 +33,7 @@ mongoose.connect(mongorc.uri,{useNewUrlParser: true},(err)=> {
   if (err) console.log("Error al conectar con Mongo");
   else {
     console.log('mongoDB en',mongorc.uri);
-    fawn.init(mongoose);
+    fawn.init(mongoose,"fawn_rollback");
     let roller = fawn.Roller();
     roller.roll()
       .then(() => {

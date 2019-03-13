@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+  .hpanel
+    .panel-body
+      h2.font-light.m-b-xs
+        | Recibo de Transferencia #
+        span= transferencia._id
+  .content.animate-panel
+    form.form-horizontal
+      .hr-line-dashed
+      .row
+        .form-group.col-sm-6
+          label.col-sm-5.control-label Origen
+          .col-lg-6
+            p.form-control-static= transferencia.origen.usuario
+            i.form-control-static= transferencia.origen._id
+        .form-group.col-sm-6
+          label.col-lg-5.control-label Destino
+          .col-sm-6
+            p.form-control-static= transferencia.destino.usuario
+            i.form-control-static= transferencia.destino._id
+      .row
+        .form-group.col-sm-6
+          label.col-sm-5.control-label Fecha
+          .col-sm-6
+            p.form-control-static= moment(transferencia.fecha).format("DD/MM/YY hh:mm:ss a")
+        .form-group.col-sm-6
+          label.col-sm-5.control-label Cantidad
+          .col-sm-6
+            p.form-control-static= transferencia.cantidad
