@@ -8,7 +8,6 @@ var logger = require('morgan');
 const passport = require('passport');
 const auth = require('./config/passport');
 
-
 var CronJob = require('cron/lib/cron.js').CronJob;
 const resHuerfanos = require('./controllers/RestaurarHuerfanos');
 const job = new CronJob(resHuerfanos.retraso, resHuerfanos.job);
