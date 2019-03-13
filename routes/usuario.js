@@ -41,6 +41,7 @@ router.post('/recarga/solicitud',auth.estaAutenticado,(req,res,next) => {
 
 router.get('/transferir',auth.estaAutenticado,(req,res,next) => {
   let opt = {usuario:req.user};
+    
   res.render('clientes/transferir',opt);
 });
 router.post('/transferir',auth.estaAutenticado,async (req,res,next) => {  
