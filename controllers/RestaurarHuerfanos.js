@@ -1,17 +1,21 @@
-var Sms = require('../models/sms');
+const Sms = require('../models/sms');
+const moment = require('moment');
+
 var n = 0;
 module.exports.resetAfterXMinutes = 5;
 module.exports.retraso = '0 */5 * * * *';
 module.exports.job = async ()=> {
-    var min5 = 1000*60*this.resetAfterXMinutes;
-    var now = new Date().getTime()+min5;
-    let sms = await Sms.find({minado:{$exists:true},"minado.cap":{$lt:now}});
+    let after = moment().add(this.resetAfterXMinutes,"minutes").toISOString();
+    let filtro = {
+        enviado:{$exists:false},
+        minado:{$exists:true},
+        "minado.cap":{$lt:after}
+    };
+    let sms = await Sms.find(filtro);
     if (sms.length>0) {
-        await Sms.updateMany({
-            minado:{$exists:true},
-            "minado.cap":{$lt:now}
-        },{
-            $unset:{minado:true}
+        await Sms.updateMany(filtro,{
+            $unset:{minado:true},
+            $inc:{nonce:1}
         });
     }
 }

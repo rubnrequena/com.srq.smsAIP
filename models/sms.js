@@ -22,6 +22,12 @@ let smsSchema = new mongo.Schema({
     minado: {
         cap: Date,
         dev: String
+    },
+    nonce:{
+        type:Number,
+        get:v => Math.round(v),
+        set:v => Math.round(v),
+        alias:"inonce"
     }
 });
 smsSchema.methods.recibidoStamp = function () {
