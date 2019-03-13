@@ -8,7 +8,15 @@ aside#menu
         .dropdown
           a.dropdown-toggle(href='#' data-toggle='dropdown')
             small.text-muted
-              | NickName
+              case usuario.tipo
+                when "aml"
+                  | SRQ
+                when "emp"  
+                  | Corporativo
+                when  "su"
+                  | Super Usuario
+                default
+                  | Usuario
               b.caret
           ul.dropdown-menu.animated.flipInX.m-t-xs
             li
