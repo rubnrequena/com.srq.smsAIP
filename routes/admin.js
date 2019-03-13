@@ -36,8 +36,7 @@ router.get("/usuarios",auth.esSuperAdmin,(req,res,next) => {
         motro += us.smsDisponibles;
       }
     });
-
-    res.render("admin/usuarios",{usuario:req.user,usuarios:_usuarios,stats:{
+    let opt = {usuario:req.user,usuarios:_usuarios,stats:{
       total:_usuarios.length,activos:act,ult30:d30,
       prc:{
         aml:paml*100/_usuarios.length,
@@ -50,7 +49,9 @@ router.get("/usuarios",auth.esSuperAdmin,(req,res,next) => {
         emp:memp, pemp: (memp*100/mtotal).toFixed(0),
         otro:motro, potro: (motro*100/mtotal).toFixed(0)
       }
-    }});
+    }};
+    if (req.query.usok) opt.nuevousuario = req.query.usok;
+    res.render("admin/usuarios",opt);
   })
 })
 router.get("/usuario/:usuario",(req,res,next) => {
@@ -74,12 +75,11 @@ router.post('/registrar',(req,res,next) => {
     }
   });
   us.save().then(() => {
-    res.render('admin/registrar',{ok:true});
-  }).catch((err) => {
+    res.redirect('/adm/usuarios?usok='+us._id);
+  }).catch(err => {
     next(err)
-  })
+  });
 })
-
 router.get("/recarga/nueva",auth.esSuperAdmin,async (req,res,next) => {
   let users = await Usuario.find();
   let _recargas = await Recarga.find().populate("destino","nombre");

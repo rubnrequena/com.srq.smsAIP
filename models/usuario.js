@@ -3,8 +3,14 @@ const bcrypt = require('bcrypt');
 
 var usuarioSq = new mongo.Schema({
   nombre:String,
-  usuario:String,
-  clave:String,
+  usuario:{
+    type:String,
+    required:true
+  },
+  clave:{
+    type:String,
+    required:true
+  },
   creado:Date,
   activo:Boolean,
   pin:{
@@ -34,6 +40,7 @@ var usuarioSq = new mongo.Schema({
   }
 })
 
+usuarioSq.index({usuario: 1}, {unique: true});
 
 usuarioSq.pre('save',function (next) {
   var usuario = this;

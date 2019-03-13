@@ -20,6 +20,9 @@ block content
           | Usuarios
         small Administrar usuarios
   .content.animate-panel
+    if nuevousuario
+      .alert.alert-success Usuario registrado exitosamente 
+        a(href="/adm/usuario/"+nuevousuario, title="Ver usuario")= "#"+nuevousuario
     .hpanel.collapsed
       .panel-heading.hbuilt
         .panel-tools
@@ -29,23 +32,38 @@ block content
             i.fa.fa-times
         | Nuevo Usuario
       .panel-body
-        form#nuevoContacto.form(method="post",action="/contactos")
-          .form-group
-            label Nombre
-            input.form-control(type="text", name="nombre")
-          .form-group
-            label Teléfono
-            input.form-control(type="text", name="numero")
-          .form-group
-            label Etiquetas
-            input.form-control(type="text", name="etiquetas")  
-      .panel-footer 
-        .pull-right
-          button.btn.btn-success(type="submit",form="nuevoContacto") Enviar
-          button.btn.btn-default.btn-sm(type="reset",form="nuevoContacto") Reiniciar          
+        form#loginForm(action="/adm/registrar" method="post")
+          .row
+            .form-group.col-lg-6
+              label Usuario
+              input.form-control(type="text" value="" id="" name="usuario")
+            .form-group.col-lg-6
+              label Nombre
+              input.form-control(type="text" value="" id="" name="nombre")
+            .form-group.col-lg-6
+              label Contraseña
+              input.form-control(type="password" value="" id="" name="clave")
+            .form-group.col-lg-6
+              label Repetir Contraseña
+              input.form-control(type="password" value="" id="" name="clave2")
+            .form-group.col-lg-6
+              label Correo
+              input.form-control(type="mail" value="" id="" name="correo")
+            .form-group.col-lg-6
+              label Telefono
+              input.form-control(type="tel" value="" id="" name="telefono")                  
+            .form-group.col-lg-12
+              label Tipo
+              select.form-control.s2(name="tipo")
+                option(value="aml") SRQAnimales
+                option(value="emp") Empresarial
+                option(value="adm") Administrador
+          .text-center
+            button.btn.btn-success(type="submit") Registrar
+            button.btn.btn-default(type="reset") Cancelar
     
     .row
-      .col-lg-3
+      .col-lg-4
         .hpanel.stats
           .panel-body.h-200
             .stats-title.pull-left
@@ -68,7 +86,7 @@ block content
                 .col-xs-6
                   small.stat-label Inactivos
                   h4= stats.total-stats.activos
-      .col-lg-3
+      .col-lg-4
         .hpanel.stats
           .panel-body.h-200.list
             .stats-title.pull-left
@@ -86,7 +104,7 @@ block content
             small Otros                
             .progress.m-t-xs.full
               .progress-bar.progress-bar-success(style='width: '+stats.prc.otro+'%', aria-valuemax='100', aria-valuemin='0', aria-valuenow=stats.prc.otro, role='progressbar')= stats.prc.otro +"%"
-      .col-lg-3
+      .col-lg-4
         .hpanel.stats
           .panel-body.h-200.list
             .stats-title.pull-left
@@ -131,8 +149,10 @@ block content
                 tr
                   td
                     a(href="/usuario/"+usuario._id, title="Editar")
-                      i.fa.fa-pencil.text-primary(aria-hidden='true')
-                      =" "+usuario.nombre 
+                      i.fa.fa-pencil.text-primary(aria-hidden='true')  
+                    a(href="/usuario/"+usuario._id, title="Remover")
+                      i.fa.fa-trash.text-danger(aria-hidden='true')
+                      ="| "+usuario.nombre   
                   td= usuario.usuario
                   if (usuario.tipo=="aml")
                     td 
