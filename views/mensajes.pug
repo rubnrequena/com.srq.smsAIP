@@ -1,9 +1,9 @@
 each sms in mensajes
   .chat-message
-    img.message-avatar(src='images/a1.jpg' alt='')
+    i.pe-7s-mail.fa-4x.message-avatar
     .message
       a.message-author(href='#')=  sms.numero
-      span.message-date= sms.recibidoStamp()
+      span.message-date= moment(sms.recibido).format("DD/MM/YY hh:mm a")
       span.message-content= sms.texto
       .m-t-md
         a.btn.btn-xs.btn-default

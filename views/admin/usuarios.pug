@@ -129,7 +129,10 @@ block content
             tbody
               each usuario in usuarios
                 tr
-                  td= usuario.nombre
+                  td
+                    a(href="/usuario/"+usuario._id, title="Editar")
+                      i.fa.fa-pencil.text-primary(aria-hidden='true')
+                      =" "+usuario.nombre 
                   td= usuario.usuario
                   if (usuario.tipo=="aml")
                     td 

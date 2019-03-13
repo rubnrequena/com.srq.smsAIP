@@ -53,6 +53,9 @@ router.get("/usuarios",auth.esSuperAdmin,(req,res,next) => {
     }});
   })
 })
+router.get("/usuario/:usuario",(req,res,next) => {
+  
+})
 router.get('/registrar',(req,res,next) => {
   res.render('admin/registrar',{usuario:req.user});
 })
