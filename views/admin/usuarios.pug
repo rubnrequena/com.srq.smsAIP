@@ -21,8 +21,9 @@ block content
         small Administrar usuarios
   .content.animate-panel
     if nuevousuario
-      .alert.alert-success Usuario registrado exitosamente 
-        a(href="/adm/usuario/"+nuevousuario, title="Ver usuario")= "#"+nuevousuario
+      .alert.alert-success Usuario registrado exitosamente, 
+        a(href="/adm/usuario/"+nuevousuario, title="Ver usuario") 
+          b quieres verlo?
     .hpanel.collapsed
       .panel-heading.hbuilt
         .panel-tools
@@ -148,9 +149,9 @@ block content
               each usuario in usuarios
                 tr
                   td
-                    a(href="/usuario/"+usuario._id, title="Editar")
+                    a(href="/adm/usuario/"+usuario._id, title="Editar")
                       i.fa.fa-pencil.text-primary(aria-hidden='true')  
-                    a(href="/usuario/"+usuario._id, title="Remover")
+                    a(href="/adm/usuario/"+usuario._id, title="Remover")
                       i.fa.fa-trash.text-danger(aria-hidden='true')
                       ="| "+usuario.nombre   
                   td= usuario.usuario

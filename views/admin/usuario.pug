@@ -1,0 +1,50 @@
+extends ../layoutMenu
+
+block content
+  .normalheader.transition.animated.fadeIn
+    .hpanel
+      .panel-body
+        a.small-header-action(href="")
+          .clip-header
+            i.fa.fa-arrow-up
+        #hbreadcrumb.pull-right.m-t-lg
+          ol.hbreadcrumb.breadcrumb
+            li
+              a(href="/") Inicio
+            li.active
+              span Usuario
+        h2.font-light.m-b-xs
+          | Usuario
+        small Ver o Editar usuario
+  .content.animate-panel
+    if editok
+      .alert.alert-success Usuario actualizado exitosamente
+
+    .hpanel
+      .panel-body
+        form#loginForm(action="/adm/registrar" method="post")
+          .row
+            .form-group.col-lg-6
+              label Usuario
+              p.form-control-static= user.usuario
+            .form-group.col-lg-6
+              label Nombre
+              input.form-control(type="text" value=user.nombre id="" name="nombre")            
+            .form-group.col-lg-6
+              label Correo
+              input.form-control(type="mail" value=user.contacto.correo id="" name="correo")
+            .form-group.col-lg-6
+              label Telefono
+              input.form-control(type="tel" value=user.contacto.telefono id="" name="telefono")                  
+            .form-group.col-lg-12
+              label Tipo
+              select.form-control.s2(name="tipo")
+                -var saml = (user.tipo=="aml"?true:false)
+                -var semp = (user.tipo=="emp"?true:false)
+                -var sotro = (user.tipo=="otro"?true:false)
+                option(value="aml",selected=saml) SRQAnimales
+                option(value="emp",selected=semp) Empresarial
+                option(value="adm",selected=sotro) Administrador
+            .form-group
+              .col-sm-6.col-sm-offset-3
+                button.btn.btn-success.btn-block(type="submit") Confirmar

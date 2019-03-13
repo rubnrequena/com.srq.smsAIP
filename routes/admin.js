@@ -55,7 +55,14 @@ router.get("/usuarios",auth.esSuperAdmin,(req,res,next) => {
   })
 })
 router.get("/usuario/:usuario",(req,res,next) => {
-  
+  Usuario.findById(req.params.usuario,(err,usuario) => {
+    if (err) next(err);
+    else {
+      if(!usuario) next({message:"Usuario no existe"});
+      else 
+        res.render("admin/usuario",{usuario:req.user,user:usuario});
+    }
+  })
 })
 router.get('/registrar',(req,res,next) => {
   res.render('admin/registrar',{usuario:req.user});
