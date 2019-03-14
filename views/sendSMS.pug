@@ -11,23 +11,25 @@ block content
         .hpanel
           .panel-body
             form#loginForm(action='/sms',method='post')
+              button#agendabtn.btn.btn-primary.btn-xs.pull-right(type='button') Agenda
+              div#agendavista.form-group.hidden
+                label.control-label(for='agenda') Agenda
+                select#agenda.form-control(multiple)
               .form-group
                 label.control-label(for='telefono') Numero
-                input#telefono.form-control(type='tel' title='Por favor ingrese el destino' required='' value='' name='num')
+                input#telefono.form-control(type='tel' title='Por favor ingrese el destino' required='' value='' name='num',autofocus)
               .form-group
+                small.pull-right Usa Ctrl+Enter para enviar
                 label.control-label(for='cuerpo') Cuerpo del Mensaje
                 textarea#cuerpo.form-control(name="txt", cols="30", rows="10")
               .checkbox
                 input#remember.i-checks(type='checkbox' checked='true')
-                |                                      Recordar Numero
+                |                                      Recordar ultimo numero
               button.btn.btn-success.btn-block Enviar
-    .row
-      .col-md-12.text-center
-        strong SRQ WebApp
-        br
-        |  2019 Copyright
+
 block append footer
   script.
+    var contactos;
     $('#loginForm').submit(function () {
       var r = $('#remember').prop("checked");
         if (r) {
@@ -38,3 +40,30 @@ block append footer
     var n = localStorage.getItem("srq.sms.remember");
     if (n) $('#telefono').val(n);
     setTimeout(()=>{ $('#msg').remove()},2000);
+    $('#agendabtn').click(function() {
+      if (!contactos) {
+        fetch('/api/contactos?view=options').
+          then(res => res.text()).
+          then(res => {
+            contactos = res;
+            $('#agenda').html(res);
+            $('#agenda').select2();
+            next();
+          })
+      } else next();
+      function next() {
+        $('#agendavista').toggleClass("hidden"); 
+        if (!$('#agendavista').hasClass("hidden")) {
+          $('#agenda').select2('open');
+        }
+      }
+    });
+    $('#agenda').change(function (e) {
+      $('#telefono').val(e.val.join(","));
+    });
+    $('#cuerpo').keypress(e => {
+      console.log(e);
+      if (e.keyCode==10 && e.ctrlKey==true) {
+        $('#loginForm').submit();
+      }
+    })

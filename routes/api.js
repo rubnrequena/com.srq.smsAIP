@@ -4,6 +4,7 @@ var router = express.Router();
 var smsControl = require('../controllers/SmsControl');
 var Usuario = require('../models/usuario');
 var Sms = require("../models/sms");
+const contacto = require('../models/contacto');
 
 const auth = require('../config/passport');
 
@@ -40,6 +41,14 @@ router.get('/queue', async (req,res,next)=>{
 router.get('/all', async (req,res,next) => {
     let mensajes = await smsControl.all(req.query.limit||10);
     res.json(mensajes);
+})
+
+router.get("/contactos",auth.estaAutenticado,(req,res,next) => {
+    contacto.find({agenda:req.user._id},(err,contactos) => {
+        if (req.query.view) {
+            if (req.query.view=="options") res.render("comun/contactoOption",{contactos:contactos});
+        } else res.json(contactos);
+    })
 })
 
 router.get("/usuario/:id",(req,res,next) => {

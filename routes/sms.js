@@ -9,15 +9,20 @@ let Sms = require('../models/sms');
 
 /* GET home page. */
 router.get('/', auth.estaAutenticado, function(req, res, next) {
-    res.render("sendSMS",{usuario:req.user});
+    res.render2("sendSMS");
 })
 router.post('/',auth.estaAutenticado, async (req, res, next) => {
-    if (req.user.smsDisponibles>0) {
+    var len = req.body.num.split(",").length;
+    if (req.user.smsDisponibles>len) {
         let sms = await smsControl.enviar(req.user,req.body);
-        if (sms) {            
+        if (sms) {
             res.render("sendSMS",{usuario:req.user,message:"Mensaje enviado"});
         } else next({state:1001,message:"Mensaje no enviado"})
     } else next({state:1001,message:"Mensaje no enviado, saldo insuficiente"})
+})
+
+router.get('/difusion',auth.estaAutenticado,(req,res,next) => {
+    res.render2("sms/difusion");
 })
 
 router.get("/enviados",auth.estaAutenticado,(req,res,next) => {
