@@ -39,7 +39,15 @@ app.use(session({
  }));
 
 app.use(passport.initialize());
-app.use(passport.session()); 
+app.use(passport.session());
+app.use((req,res,next) => {
+  res.render2 = (view,opt) => {
+    opt = opt || {};
+    if (req.user) opt.usuario = req.user;
+    res.render(view,opt);
+  }
+  next();
+})
 
 //routes
 var indexRouter = require('./routes/index');

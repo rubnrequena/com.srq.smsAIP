@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const cors = require('cors');
 
 var smsControl = require('../controllers/SmsControl');
 var Usuario = require('../models/usuario');
@@ -20,7 +21,7 @@ router.get('/enviar/:key',async (req,res,next)=>{
     } else res.status(400).send({code:401,msg:"mensaje no enviado"});
 })
 
-router.get("/log",(req,res,next) => {
+router.get("/log",cors(),(req,res,next) => {
     var l = new log(req.query);
     l.save((err)=>{
         if (err) res.json(err);
