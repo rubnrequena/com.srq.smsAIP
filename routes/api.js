@@ -4,6 +4,7 @@ var router = express.Router();
 var smsControl = require('../controllers/SmsControl');
 var Usuario = require('../models/usuario');
 var Sms = require("../models/sms");
+const log = require("../models/log");
 const contacto = require('../models/contacto');
 
 const auth = require('../config/passport');
@@ -18,6 +19,17 @@ router.get('/enviar/:key',async (req,res,next)=>{
         else res.json({code:200,sms:sms});
     } else res.status(400).send({code:401,msg:"mensaje no enviado"});
 })
+
+router.get("/log",(req,res,next) => {
+    var l = new log(req.query);
+    l.save((err)=>{
+        if (err) res.json(err);
+        else {
+            res.json({message:"ok"});
+        }
+    })
+})
+
 router.get('/enviar/:num/:txt/:repetir',async (req,res,next)=>{
     let rpt = req.params.repetir || 10;
     let lote = []; let msg = req.params.txt;
