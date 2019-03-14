@@ -48,6 +48,49 @@ router.get("/usuario/:id",(req,res,next) => {
         if (usuario) res.json(usuario);
         else res.json({code:1000,msg:"usuario no registrado"});
     })
+});
+
+router.get("/usuario/rem/:id",auth.esSuperAdmin,(req,res,next) => {
+    Usuario.findById(req.params.id,(err,us) => {
+        if (err) next(err);
+        else {
+            //validar usuario
+            if (!us) res.json({code:"error",message:"usuario no existe"});
+            else {
+                us.activo = false;
+                us.papelera = true;
+                us.papeleraMeta = {
+                    tiempo:new Date,
+                    resp:req.user.usuario
+                };
+                us.save((err) => {
+                    if (err) res.json({code:"error",message:err.message});
+                    else res.json({code:"ok"});
+                })
+            }
+        }
+    })
+});
+router.get("/usuario/res/:id",auth.esSuperAdmin,(req,res,next) => {
+    Usuario.findById(req.params.id,(err,us) => {
+        if (err) next(err);
+        else {
+            //validar usuario
+            if (!us) res.json({code:"error",message:"usuario no existe"});
+            else {
+                us.activo = true;
+                us.papelera = false;
+                us.papeleraMeta = {
+                    tiempo:new Date,
+                    resp:req.user.usuario
+                };
+                us.save((err) => {
+                    if (err) res.json({code:"error",message:err.message});
+                    else res.json({code:"ok"});
+                })
+            }
+        }
+    })
 })
 
 router.get("/sms/last",auth.estaAutenticado,(req,res,next) => {

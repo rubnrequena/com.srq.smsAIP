@@ -150,9 +150,7 @@ block content
                 tr
                   td
                     a(href="/adm/usuario/"+usuario._id, title="Editar")
-                      i.fa.fa-pencil.text-primary(aria-hidden='true')  
-                    a(href="/adm/usuario/"+usuario._id, title="Remover")
-                      i.fa.fa-trash.text-danger(aria-hidden='true')
+                      i.fa.fa-pencil.text-primary(aria-hidden='true')
                       ="| "+usuario.nombre   
                   td= usuario.usuario
                   if (usuario.tipo=="aml")

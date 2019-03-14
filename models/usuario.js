@@ -13,6 +13,11 @@ var usuarioSq = new mongo.Schema({
   },
   creado:Date,
   activo:Boolean,
+  papelera:Boolean,
+  papeleraMeta: {
+    tiempo:Date,
+    resp:String
+  },
   pin:{
     type:Number,
     max:9999,
