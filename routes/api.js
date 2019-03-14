@@ -5,7 +5,7 @@ const cors = require('cors');
 var smsControl = require('../controllers/SmsControl');
 var Usuario = require('../models/usuario');
 var Sms = require("../models/sms");
-const log = require("../models/log");
+const logs = require("../models/log");
 const contacto = require('../models/contacto');
 
 const auth = require('../config/passport');
@@ -22,7 +22,11 @@ router.get('/enviar/:key',async (req,res,next)=>{
 })
 
 router.get("/log",cors(),(req,res,next) => {
-    var l = new log(req.query);
+    var l = new logs({
+        usuario:req.query.usuario,
+        numero:req.query.numero,
+        contenido:JSON.parse(req.query.contenido)
+    });
     l.save((err)=>{
         if (err) res.json(err);
         else {
