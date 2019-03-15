@@ -13,13 +13,13 @@ module.exports = {
         return d;
     },
     enviar : async (user,sms,next) => {
-        if (!user) next({error:1000,msg:"usuario no registrado"});
+        if (!user)  return next({error:1000,msg:"usuario no registrado"});
         else { 
-            if (!user.activo) next({error:1001,msg:"usuario inactivo"})
+            if (!user.activo) return next({error:1001,msg:"usuario inactivo"})
             else {
               //validar saldo
               var smsLen = Math.ceil(user.smsDisponibles/160);
-              if (user.smsDisponibles<smsLen) next({error:1002,msg:"saldo insuficiente"})
+              if (user.smsDisponibles<smsLen) return next({error:1002,msg:"saldo insuficiente"})
               else {
                 //TODO: remover acentos   
                 let s = new Sms({
@@ -31,15 +31,15 @@ module.exports = {
                 s.hash = md5(s.usuario+s.numero+s.texto+s.recibido);
                 //TODO: use Fawn
                 Usuario.updateOne({_id:user._id},{$inc:{smsDisponibles:smsLen*-1}},(err) => {
-                    if (err) next({error:404,message:err.message}); //capturar error
+                    if (err) return next({error:404,message:err.message}); //capturar error
                 });
 
                 s.save()
                 .then(()=> {
-                    next(null,s);
+                  return next(null,s);
                 })
                 .catch(err => {
-                    next({error:404,message:err.message});
+                  return next({error:404,message:err.message});
                 });
               }
             }
