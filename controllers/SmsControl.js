@@ -14,36 +14,33 @@ module.exports = {
     },
     enviar : async (user,sms,next) => {
         if (!user)  return next({error:1000,msg:"usuario no registrado"});
-        else { 
-            if (!user.activo) return next({error:1001,msg:"usuario inactivo"})
-            else {
-              //validar saldo
-              var smsLen = Math.ceil(user.smsDisponibles/160);
-              if (user.smsDisponibles<smsLen) return next({error:1002,msg:"saldo insuficiente"})
-              else {
-                //TODO: remover acentos   
-                let s = new Sms({
-                    usuario:user._id,
-                    numero:sms.num,
-                    texto:sms.txt,
-                    recibido:new Date
-                });
-                s.hash = md5(s.usuario+s.numero+s.texto+s.recibido);
-                //TODO: use Fawn
-                Usuario.updateOne({_id:user._id},{$inc:{smsDisponibles:smsLen*-1}},(err) => {
-                    if (err) return next({error:404,message:err.message}); //capturar error
-                });
+        if (!user.activo) return next({error:1001,msg:"usuario inactivo"})
+        //validar saldo
+        var smsLen = Math.ceil(user.smsDisponibles/160);
+        if (user.smsDisponibles<smsLen) return next({error:1002,msg:"saldo insuficiente"})
+        
+        //TODO: remover acentos   
+        let s = new Sms({
+            usuario:user._id,
+            numero:sms.num,
+            texto:sms.txt,
+            recibido:new Date
+        });
+        s.hash = md5(s.usuario+s.numero+s.texto+s.recibido);
+        
+        Usuario.updateOne({_id:user._id},{$inc:{smsDisponibles:smsLen*-1}},(err) => {
+            if (err) next({error:404,message:err.message})
+        });
 
-                s.save()
-                .then(()=> {
-                  return next(null,s);
-                })
-                .catch(err => {
-                  return next({error:404,message:err.message});
-                });
-              }
-            }
-        }
+        s.save()
+        .then(()=> {
+          console.log("GOOOD");
+          return next(null,s);
+        })
+        .catch(err => {
+          console.log(err);
+          next({error:404,message:err.message});
+        });
     },
     queue: async (req) => {
         let lm = parseInt(req.limit) || 10;

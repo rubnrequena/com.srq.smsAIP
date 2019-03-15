@@ -53,7 +53,7 @@ app.use((req,res,next) => {
 var indexRouter = require('./routes/index');
 var usuariosRouter = require('./routes/usuario');
 var smsRouter = require('./routes/sms');
-var apiRouter = require('./routes/api');
+var apiRouter = require('./routes/api/index');
 var admRouter = require('./routes/admin');
 
 app.use('/', indexRouter);
