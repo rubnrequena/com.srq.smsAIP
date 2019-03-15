@@ -3,7 +3,7 @@ const moment = require('moment');
 
 var n = 0;
 module.exports.resetAfterXMinutes = 5;
-module.exports.retraso = '0 */2 * * * *';
+module.exports.retraso = '0 */5 * * * *';
 module.exports.job = async ()=> {
     let after = moment().add(this.resetAfterXMinutes,"minutes").toISOString();
     let filtro = {

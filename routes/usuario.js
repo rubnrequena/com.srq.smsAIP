@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fawn = require('fawn');
 
-const auth = require('../config/passport.js');
+const auth = require('../config/passport');
 const cache = require('../config/cache');
 
 const Recarga = require('../models/recarga');
@@ -10,11 +10,11 @@ const Usuario = require('../models/usuario');
 const Transferencia = require('../models/transferencia');
 
 /* GET users listing. */
-router.get('/usuario', function() {
+router.get('/usuario', function(req, res, next) {
   
 });
 //usuario
-router.get('/recarga/solicitud',auth.estaAutenticado, async (req,res) => {
+router.get('/recarga/solicitud',auth.estaAutenticado, async (req,res,next) => {
   res.render("clientes/recargaSolicitud",{usuario:req.user,paquetes:await cache.paquetes()});
 });
 router.post('/recarga/solicitud',auth.estaAutenticado,(req,res,next) => {
@@ -39,7 +39,7 @@ router.post('/recarga/solicitud',auth.estaAutenticado,(req,res,next) => {
   });
 })
 
-router.get('/transferir',auth.estaAutenticado,(req,res) => {
+router.get('/transferir',auth.estaAutenticado,(req,res,next) => {
   let opt = {usuario:req.user};
     
   res.render('clientes/transferir',opt);
@@ -76,7 +76,7 @@ router.post('/transferir',auth.estaAutenticado,async (req,res,next) => {
 })
 router.get("/transferencia/:recibo",(req,res,next) => {
   Transferencia.findById(req.params.recibo,(err,trans) => {
-    if (err) next(err);
+    if (err) next(error);
     else {
       res.render('clientes/transferencia',{transferencia:trans});
     }

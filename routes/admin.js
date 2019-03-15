@@ -8,10 +8,10 @@ const Usuario = require('../models/usuario');
 const Recarga = require('../models/recarga');
 const Paquetes = require('../models/paquetes');
 
-const auth = require('../config/passport.js');
+const auth = require('../config/passport');
 const cache = require('../config/cache');
 
-router.get("/usuarios",auth.esSuperAdmin,(req,res) => {
+router.get("/usuarios",auth.esSuperAdmin,(req,res,next) => {
   Usuario.find({},(err,_usuarios) => {
     let act = 0, d30 = 0;
     let last30d = moment().subtract(30,"days");    
@@ -64,7 +64,7 @@ router.get("/usuario/:usuario",(req,res,next) => {
     }
   })
 })
-router.get('/registrar',(req,res) => {
+router.get('/registrar',(req,res,next) => {
   res.render('admin/registrar',{usuario:req.user});
 })
 router.post('/registrar',(req,res,next) => {
@@ -87,7 +87,7 @@ router.post('/registrar',(req,res,next) => {
     next(err)
   });
 })
-router.get("/recarga/nueva",auth.esSuperAdmin,async (req,res) => {
+router.get("/recarga/nueva",auth.esSuperAdmin,async (req,res,next) => {
   let users = await Usuario.find();
   let _recargas = await Recarga.find().populate("destino","nombre");
   res.render('admin/recargar',{usuario:req.user,usuarios:users,
@@ -130,7 +130,7 @@ router.post("/recarga/nueva",auth.esSuperAdmin,async (req,res,next) => {
     });
   })
 });
-router.get("/recarga/solicitudes",auth.esSuperAdmin, (req,res) => {
+router.get("/recarga/solicitudes",auth.esSuperAdmin, (req,res,next) => {
   Recarga.find({procesado:{$exists:false}},(err,solicitudes) => {
     res.render("admin/solicitudes",{usuario:req.user,solicitudes:solicitudes});
   }).populate("pkg").populate("destino");
@@ -164,7 +164,7 @@ router.get("/recarga/confirmar/:solicitud",auth.esSuperAdmin, (req,res,next) => 
     })
   }
 });
-router.get("/recarga/:id",auth.esSuperAdmin,async (req,res) => {
+router.get("/recarga/:id",auth.esSuperAdmin,async (req,res,next) => {
   var r = await Recarga.findById(req.params.id).populate("destino","nombre").populate("pkg","nombre codigo");
   res.json(r);
 });

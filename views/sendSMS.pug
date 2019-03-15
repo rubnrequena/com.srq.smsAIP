@@ -42,7 +42,7 @@ block append footer
     setTimeout(()=>{ $('#msg').remove()},2000);
     $('#agendabtn').click(function() {
       if (!contactos) {
-        fetch('/api/contactos?v=options').
+        fetch('/api/contactos?view=options').
           then(res => res.text()).
           then(res => {
             contactos = res;
