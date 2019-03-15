@@ -10,7 +10,7 @@ const contacto = require('../models/contacto');
 
 const auth = require('../config/passport');
 
-router.get('/enviar/:key',async (req,res,next)=>{
+router.get('/enviar/:key',async (req,res)=>{
     let u = await Usuario.findById(req.params.key);
     let sms = await smsControl.enviar(u,req.query);
     if (sms) {
@@ -21,7 +21,7 @@ router.get('/enviar/:key',async (req,res,next)=>{
     } else res.status(400).send({code:401,msg:"mensaje no enviado"});
 })
 
-router.get("/log",cors(),(req,res,next) => {
+router.get("/log",cors(),(req,res) => {
     var l = new logs({
         usuario:req.query.usuario,
         numero:req.query.numero,
@@ -35,7 +35,7 @@ router.get("/log",cors(),(req,res,next) => {
     })
 })
 
-router.get('/enviar/:num/:txt/:repetir',async (req,res,next)=>{
+router.get('/enviar/:num/:txt/:repetir',async (req,res)=>{
     let rpt = req.params.repetir || 10;
     let lote = []; let msg = req.params.txt;
     for (let i=0;i<rpt;i++) {
@@ -46,21 +46,21 @@ router.get('/enviar/:num/:txt/:repetir',async (req,res,next)=>{
     res.json(lote);
 })
 
-router.get('/reward/:id',async (req,res,next)=>{
+router.get('/reward/:id',async (req,res)=>{
     let sms = await smsControl.claimReward(req.params.id);
     res.json(sms);
 })
 
-router.get('/queue', async (req,res,next)=>{
+router.get('/queue', async (req,res)=>{
     let r = await smsControl.queue(req.query);
     res.json(r);
 })
-router.get('/all', async (req,res,next) => {
+router.get('/all', async (req,res) => {
     let mensajes = await smsControl.all(req.query.limit||10);
     res.json(mensajes);
 })
 
-router.get("/contactos",auth.estaAutenticado,(req,res,next) => {
+router.get("/contactos",auth.estaAutenticado,(req,res) => {
     contacto.find({agenda:req.user._id},(err,contactos) => {
         if (req.query.view) {
             if (req.query.view=="options") res.render("comun/contactoOption",{contactos:contactos});
@@ -132,7 +132,7 @@ router.get("/sms/last",auth.estaAutenticado,(req,res,next) => {
 })
 
 router.get('/sms/:id',(req,res,next) => {
-    smsControl.sms(req.params.id,(err,sms) => {
+    smsControl.sms(req.params.id,(err) => {
         if (err) next(err);
         //if (!sms) res.json({code:404,error:"sms no existe"});
         //else res.json(sms);
