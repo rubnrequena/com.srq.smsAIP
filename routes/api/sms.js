@@ -48,21 +48,10 @@ router.get("/estadisticas",async (req,res) => {
 
 router.get('/enviar/:key',async (req,res)=>{
   let u = await Usuario.findById(req.params.key);
-  let sms = await smsControl.enviar(u,req.query);
-  if (sms) res.json(sms);
-  else res.status(400).send({code:401,msg:"mensaje no enviado"});
-});
-
-router.get('/enviar/:key/:repetir',async (req,res)=>{
-  let u = await Usuario.findById(req.params.key);
-  let rpt = req.params.repetir || 10;
-  let lote = []; let msg = req.query.txt;
-  for (let i=0;i<rpt;i++) {
-      req.query.txt = msg+" "+i;
-      let sms = await smsControl.enviar(u,req.query);
-      if (sms) lote.push(sms);
-  }
-  res.json(lote);
+  smsControl.enviar(u,req.query,(err,sms) => {
+    if (err) res.json({message:err.message})
+    else res.json(sms);
+  });
 });
 router.get("/last",auth.estaAutenticado,(req,res,next) => {
   let limit = parseInt(req.query.limit) || 10;
@@ -75,7 +64,12 @@ router.get("/last",auth.estaAutenticado,(req,res,next) => {
       }
   }).sort({recibido:-1}).limit(limit);
 })
-
+router.get('/sms/:id',(req,res,next) => {
+  smsControl.sms(req.params.id,(err,sms) => {
+      if (err) next(err);
+      else res.json(sms);
+  },next);
+})
 /* router.get("/bot/:repetir", async (req,res) => {
   var u = await Usuario.find();
   
@@ -86,7 +80,7 @@ router.get("/last",auth.estaAutenticado,(req,res,next) => {
     var uix = parseInt(Math.random()*u.length);
     us = u[uix];
     req.query.msg = `${msg} ${index}`;
-    var rsms = await smsControl.enviar(us,req.query);
+    var rsms = await smsControl.enviar(us,req.query); //actualizar smsControlEnviar(User,Body,callback(err,sms))
     if (rsms.code) fail++
     else success++;
   }

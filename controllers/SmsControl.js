@@ -12,10 +12,13 @@ module.exports = {
         let d = await Sms.find({}).limit(limit);        
         return d;
     },
-    enviar : async (user,sms) => {
-        if (!user) return {error:1000,msg:"usuario no registrado"};
-        if (!user.activo) return {error:1001,msg:"usuario inactivo"};
-        if (user.smsDisponibles<1) return {error:1002,msg:"saldo insuficiente"};
+    enviar : async (user,sms,next) => {
+        if (!user) next({error:1000,msg:"usuario no registrado"});
+        if (!user.activo) next({error:1001,msg:"usuario inactivo"});
+        //validar saldo
+        var smsLen = Math.ceil(user.smsDisponibles/160);
+        if (user.smsDisponibles<smsLen) next({error:1002,msg:"saldo insuficiente"});
+        //TODO: remover acentos   
         let s = new Sms({
             usuario:user._id,
             numero:sms.num,
@@ -23,18 +26,17 @@ module.exports = {
             recibido:new Date
         });
         s.hash = md5(s.usuario+s.numero+s.texto+s.recibido);
-
-        user.smsDisponibles--;
-        Usuario.updateOne({_id:user._id},{smsDisponibles:user.smsDisponibles},(err) => {
-            if (err) return {error:404,message:err.message}; //capturar error
-        })
+        //TODO: use Fawn
+        Usuario.updateOne({_id:user._id},{$inc:{smsDisponibles:smsLen*-1}},(err) => {
+            if (err) next({error:404,message:err.message}); //capturar error
+        });
 
         s.save()
         .then(()=> {
-            return s
+            next(null,s);
         })
         .catch(err => {
-            return {error:404,message:err.message};
+            next({error:404,message:err.message});
          });
     },
     queue: async (req) => {

@@ -11,7 +11,7 @@ let smsSchema = new mongo.Schema({
         type:String,
         required:true,
         minlength:10,
-        maxlength:13,
+        maxlength:14,
         match:[
             /^(?:(?:\+?58\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|0?([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})$/,
             'Formato de numero invalido'
@@ -19,8 +19,7 @@ let smsSchema = new mongo.Schema({
     },
     texto:{
         type:String,
-        required:true,
-        maxlength:160
+        required:true
     },
     prioridad: {
         type:Number,
@@ -38,7 +37,8 @@ let smsSchema = new mongo.Schema({
         get:v => Math.round(v),
         set:v => Math.round(v),
         alias:"inonce"
-    }
+    },
+    meta:mongo.SchemaTypes.Mixed
 });
 smsSchema.methods.recibidoStamp = function () {
     var d = new Date(this.recibido);

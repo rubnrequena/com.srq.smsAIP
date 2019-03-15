@@ -16,21 +16,11 @@ router.use("/sms",smsRouter);
 
 router.get('/enviar/:key',async (req,res)=>{
     let u = await Usuario.findById(req.params.key);
-    let sms = await smsControl.enviar(u,req.query);
-    if (sms) res.json(sms);
-    else res.status(400).send({code:401,msg:"mensaje no enviado"});
-})
-router.get('/enviar/:num/:txt/:repetir',async (req,res)=>{
-    let rpt = req.params.repetir || 10;
-    let lote = []; let msg = req.params.txt;
-    for (let i=0;i<rpt;i++) {
-        req.params.txt = msg+" "+i;
-        let sms = await smsControl.enviar(req.params);
-        if (sms) lote.push(sms);
-    }
-    res.json(lote);
-})
-
+    smsControl.enviar(u,req.query,(err,sms) => {
+        if (err) res.json(err);
+        else res.json(sms);
+    });
+});
 router.get("/log",cors(),(req,res) => {
     var l = new logs({
         usuario:req.query.usuario,
@@ -43,21 +33,19 @@ router.get("/log",cors(),(req,res) => {
             res.json({message:"ok"});
         }
     })
-})
+});
 router.get('/reward/:id',async (req,res)=>{
     let sms = await smsControl.claimReward(req.params.id);
     res.json(sms);
-})
-
+});
 router.get('/queue', async (req,res)=>{
     let r = await smsControl.queue(req.query);
     res.json(r);
-})
+});
 router.get('/all', async (req,res) => {
     let mensajes = await smsControl.all(req.query.limit||10);
     res.json(mensajes);
-})
-
+});
 router.get("/contactos/",auth.estaAutenticado,(req,res) => {
     let filtro;
     let select = "nombre numero -_id";
@@ -81,8 +69,7 @@ router.get("/usuario/:id",(req,res,next) => {
         if (usuario) res.json(usuario);
         else res.json({code:1000,msg:"usuario no registrado"});
     })
-});
-
+}); 
 router.get("/usuario/rem/:id",auth.esSuperAdmin,(req,res,next) => {
     Usuario.findById(req.params.id,(err,us) => {
         if (err) next(err);
