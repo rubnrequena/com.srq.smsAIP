@@ -1,7 +1,6 @@
 const Sms = require('../models/sms');
 const moment = require('moment');
 
-var n = 0;
 module.exports.resetAfterXMinutes = 3;
 module.exports.retraso = '0 */2 * * * *';
 module.exports.job = async ()=> {
