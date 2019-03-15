@@ -1,0 +1,129 @@
+extends ../layoutMenu
+append header
+  link(rel="stylesheet", href="/vendor/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css")
+block content
+  .row
+    .col-md-12
+      .text-center.m-b-md
+        h3 
+          i.pe-7s-speaker
+          |  Enviar una Difusion
+        if message
+          small#msg.text-success=message
+      .hpanel
+        .panel-body
+          .row
+            .text-center.m-b-md#wizardControl
+              a.btn.btn-primary(href='#step1', data-toggle='tab') Paso 1 - Contactos
+              a.btn.btn-default(href='#step2', data-toggle='tab') Paso 2 - Datos
+              a.btn.btn-default(href='#step3', data-toggle='tab') Paso 3 - Mensaje
+            .tab-content
+              #step1.p-m.tab-pane.active
+                .row
+                  .col-sm-8
+                    form#busqueda.form
+                      .from-group
+                        label.label-control Buscar
+                        .input-group
+                          input#buscarval.form-control(name="s")
+                          span.input-group-btn
+                            button.btn.btn-primary(type='submit')
+                              i.fa.fa-search(aria-hidden='true') &nbsp;
+                      .form-group
+                        label.label-control Resultados
+                        table.table
+                          +tableHead
+                          tbody#busqResult
+                  .col-sm-4
+                    table.table.table-stripped
+                      thead
+                        tr
+                          th Nombre
+                          th Numero
+                .text-right.m-t-xs
+                  a.btn.btn-default.prev(href='#') 
+                    | Siguiente                    
+                    i.fa.fa-chevron-right(aria-hidden='true') &nbsp;
+              #step2.p-m.tab-pane
+                .row
+                  .col-lg-3.text-center
+                    i.pe-7s-credit.fa-5x.text-muted
+                    p.small.m-t-md
+                      strong It is a long
+                      | established fact that a reader will be distracted by the readable
+                      br
+                      br
+                      | Many desktop publishing packages and web page editors now use
+                  .col-lg-9
+                    .row
+                      .form-group.col-lg-12
+                        label Name on Card
+                        input.form-control(type='', name='card_name')
+                      .form-group.col-lg-6
+                        label Card Number
+                        input.form-control(type='text', name='')
+                      .form-group.col-lg-6
+                        label Billing Address
+                        input.form-control(type='text', name='')
+                      .form-group.col-lg-12
+                        .row
+                          .col-xs-4.form-group
+                            label CVC
+                            input.form-control(placeholder='ex. 381', type='text', name='cvc')
+                          .col-xs-4.form-group
+                            label Expiration
+                            input.form-control(placeholder='MM', type='text', name='expire_month')
+                          .col-xs-4.form-group
+                            label
+                            input.form-control(placeholder='YYYY', type='text', name='expire_year')
+                .text-right.m-t-xs
+                  a.btn.btn-default.prev(href='#') Previous
+                  a.btn.btn-default.next(href='#') Next
+              #step3.tab-pane
+                .row.text-center.m-t-lg.m-b-lg
+                  .col-lg-12
+                    i.pe-7s-check.fa-5x.text-muted
+                    p.small.m-t-md
+                      strong There are many
+                      | variations of passages of Lorem Ipsum available, but the majority have suffered
+                  .checkbox.col-lg-12
+                    .icheckbox_square-green(style='position: relative;')
+                      input.i-checks.approveCheck(type='checkbox', name='approve', style='position: absolute; opacity: 0;')
+                      ins.iCheck-helper(style='position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;')
+                    | Approve this form
+                .text-right.m-t-xs
+                  a.btn.btn-default.prev(href='#') Previous
+                  a.btn.btn-default.next(href='#') Next
+                  a.btn.btn-success.submitWizard(href='#') Submit
+append footer
+  script.
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      $('a[data-toggle="tab"]').removeClass('btn-primary');
+      $('a[data-toggle="tab"]').addClass('btn-default');
+      $(this).removeClass('btn-default');
+      $(this).addClass('btn-primary');
+    })
+    $('.next').click(function(){
+        var nextId = $(this).parents('.tab-pane').next().attr("id");
+        $('[href="#'+nextId+'"]').tab('show');
+    })
+    $('.prev').click(function(){
+        var prevId = $(this).parents('.tab-pane').prev().attr("id");
+        $('[href="#'+prevId+'"]').tab('show');
+    })
+    
+    $('#busqueda').submit(function (e) {
+      e.preventDefault(e);
+      var s = $('#buscarval').val();
+      fetch("/api/contactos/?v=rowcheck&s="+s)
+        .then(res => res.text())
+        .then(res => {
+          $('#busqResult').html(res);
+        })
+    })
+
+mixin tableHead
+  thead
+    tr
+      th Nombre
+      th Numero

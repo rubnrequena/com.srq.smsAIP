@@ -1,14 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var md5 = require("md5");
-const auth = require('../config/passport');
+const auth = require('../config/passport.js');
 
-const Usuario = require('../models/usuario');
 var smsControl = require('../controllers/SmsControl');
 let Sms = require('../models/sms');
 
 /* GET home page. */
-router.get('/', auth.estaAutenticado, function(req, res, next) {
+router.get('/', auth.estaAutenticado, function(req, res) {
     res.render2("sendSMS");
 })
 router.post('/',auth.estaAutenticado, async (req, res, next) => {
@@ -21,7 +19,7 @@ router.post('/',auth.estaAutenticado, async (req, res, next) => {
     } else next({state:1001,message:"Mensaje no enviado, saldo insuficiente"})
 })
 
-router.get('/difusion',auth.estaAutenticado,(req,res,next) => {
+router.get('/difusion',auth.estaAutenticado,(req,res) => {
     res.render2("sms/difusion");
 })
 
@@ -68,7 +66,7 @@ router.get('/minado/:device/:hash',(req,res,next)=>{
     })
 })
 
-router.get('/minero/:device',(req,res,next)=>{
+router.get('/minero/:device',(req,res)=>{
     Sms.findOne({minado:{$exists:false}},(err,sms)=>{
         var rs = {};
         if (sms) {
@@ -87,7 +85,7 @@ router.get('/minero/:device',(req,res,next)=>{
     }).sort({recibido:-1});
 })
 
-router.get("/:id",(req,res,next)=>{
+router.get("/:id",(req,res)=>{
     Sms.findById(req.params.id,(err,sms)=>{
         res.json(sms);
     })

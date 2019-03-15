@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 var createError = require('http-errors');
 var express = require('express');
 const session = require('express-session');
@@ -6,6 +7,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 const passport = require('passport');
 const compression = require('compression');
+const morgan = require('morgan');
 
 var CronJob = require('cron/lib/cron.js').CronJob;
 const resHuerfanos = require('./controllers/RestaurarHuerfanos');
@@ -25,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(morgan("dev"));
 
 let mongorc = require("./config/mongo");
 app.use(session({
@@ -53,7 +56,7 @@ app.use((req,res,next) => {
 var indexRouter = require('./routes/index');
 var usuariosRouter = require('./routes/usuario');
 var smsRouter = require('./routes/sms');
-var apiRouter = require('./routes/api');
+var apiRouter = require('./routes/api/index');
 var admRouter = require('./routes/admin');
 
 app.use('/', indexRouter);
@@ -63,12 +66,12 @@ app.use('/api',apiRouter);
 app.use('/adm',admRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function(req, res, next) {  
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

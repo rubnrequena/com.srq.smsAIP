@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "test": "set mongoURI=mongodb://localhost:27017/srqhermes&&nodemon ./bin/www"
+    "start": "cls&&node ./bin/www",
+    "test": "cls&&set mongoURI=mongodb://localhost:27017/srqhermes&&nodemon ./bin/www",
+    "prod": "set mongoURI=mongodb://dario:dario123@ds139985.mlab.com:39985/srqhermes&&nodemon ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^3.0.4",
@@ -27,5 +28,8 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pug": "2.0.0-beta11"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.1"
   }
 }

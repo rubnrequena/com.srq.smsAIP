@@ -1,22 +1,21 @@
 var express = require('express');
 var router = express.Router();
 const passport = require('passport');
-const auth = require('../config/passport');
+const auth = require('../config/passport.js');
 const moment = require('moment');
 
 const Contacto = require("../models/contacto");
 const Sms = require('../models/sms');
 
-router.get('/', auth.estaAutenticado, function(req, res, next) {
+router.get('/', auth.estaAutenticado, function(req, res) {
   if (req.user.tipo=="su") res.render('index', { usuario:req.user, title: 'mSRQ' });
   else {
     res.render('clientes/index', { usuario:req.user, title: 'mSRQ' });
   }
 });
 
-router.get("/perfil",auth.estaAutenticado,async (req,res,next) => {
+router.get("/perfil",auth.estaAutenticado,async (req,res) => {
   let sms = await Sms.find({usuario:req.user._id});
-  var now = new Date();
   const ma = moment().startOf("month");
   const mb = moment().endOf("month");
   const wa = moment().startOf("isoWeek");
@@ -78,7 +77,7 @@ router.post("/contactos",auth.estaAutenticado, (req,res,next) => {
   })
 })
 
-router.get('/login',(req,res,next) => {
+router.get('/login',(req,res) => {
   res.render('login');
 })
 router.post('/login',(req,res,next) => {
@@ -87,7 +86,7 @@ router.post('/login',(req,res,next) => {
     failureRedirect: '/login'
   })(req,res,next);
 })
-router.get("/logout",(req,res,next) => {
+router.get("/logout",(req,res) => {
   req.logOut();
   res.redirect('/login')
 })

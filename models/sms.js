@@ -2,10 +2,20 @@ let mongo = require('mongoose');
     
 let smsSchema = new mongo.Schema({
     hash: String,
-    usuario:{type:mongo.Schema.Types.ObjectId,ref:"Usuario"},
+    usuario:{
+        type:mongo.Schema.Types.ObjectId,
+        ref:"Usuario",
+        required:true
+    },
     numero:{
         type:String,
-        required:true
+        required:true,
+        minlength:10,
+        maxlength:13,
+        match:[
+            /^(?:(?:\+?58\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|0?([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})$/,
+            'Formato de numero invalido'
+        ]
     },
     texto:{
         type:String,
@@ -17,7 +27,7 @@ let smsSchema = new mongo.Schema({
         default:0
     },
     enviado:Date,
-    recibido:Date,    
+    recibido:Date, 
     expira:Number,
     minado: {
         cap: Date,
