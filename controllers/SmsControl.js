@@ -5,7 +5,6 @@ var Usuario = require('../models/usuario');
 module.exports = {
     sms : async (id,next,err) => {
        Sms.findById(id).then((err,sms) => {
-           console.log(sms);
            next(sms);
        }).catch(err);
     },
@@ -14,9 +13,9 @@ module.exports = {
         return d;
     },
     enviar : async (user,sms) => {
-        if (!user) return 1000;
-        if (!user.activo) return 1001;
-        if (user.smsDisponibles<1) return 1002;
+        if (!user) return {error:1000,msg:"usuario no registrado"};
+        if (!user.activo) return {error:1001,msg:"usuario inactivo"};
+        if (user.smsDisponibles<1) return {error:1002,msg:"saldo insuficiente"};
         let s = new Sms({
             usuario:user._id,
             numero:sms.num,
@@ -26,11 +25,17 @@ module.exports = {
         s.hash = md5(s.usuario+s.numero+s.texto+s.recibido);
 
         user.smsDisponibles--;
-        Usuario.updateOne({_id:user._id},{smsDisponibles:user.smsDisponibles},(err,res) => {
-            if (err) next(err); //capturar error
+        Usuario.updateOne({_id:user._id},{smsDisponibles:user.smsDisponibles},(err) => {
+            if (err) return {error:404,message:err.message}; //capturar error
         })
 
-        return await s.save();
+        s.save()
+        .then(()=> {
+            return s
+        })
+        .catch(err => {
+            return {error:404,message:err.message};
+         });
     },
     queue: async (req) => {
         let lm = parseInt(req.limit) || 10;
