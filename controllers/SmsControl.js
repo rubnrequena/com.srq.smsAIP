@@ -16,7 +16,8 @@ module.exports = {
         if (!user)  return next({error:1000,msg:"usuario no registrado"});
         if (!user.activo) return next({error:1001,msg:"usuario inactivo"})
         //validar saldo
-        var smsLen = Math.ceil(user.smsDisponibles/160);
+        var smsLen = Math.ceil(sms.txt.length/160);
+        if (smsLen<1) return next({error:404,msg:"mensaje invalido"})
         if (user.smsDisponibles<smsLen) return next({error:1002,msg:"saldo insuficiente"})
         
         //TODO: remover acentos   
